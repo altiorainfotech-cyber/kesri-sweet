@@ -3,13 +3,19 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Brand Colors */
+  --color-primary: #FF9900;
+  --color-primary-dark: #FF8400;
+  --color-neutral-light: #E0DCDB;
+  --color-cream: #F4F1EC;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-island-moments);
 }
 
 @media (prefers-color-scheme: dark) {
