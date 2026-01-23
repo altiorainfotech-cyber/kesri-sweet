@@ -5,14 +5,14 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex" style={{backgroundImage: 'url(/images/home-page/hero-section-bg.png)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
       {/* Left Side - Content */}
-      <div className="w-full lg:w-1/2 relative bg-[var(--color-cream)] flex items-center">
+      <div className="w-full lg:w-1/2 relative  flex items-center">
         {/* Left side background image */}
         <div className="absolute inset-0">
           <Image
             src="/images/home-page/leftside-kaju-katli-bg.png"
             alt="Background"
             fill
-            className="object-cover opacity-30"
+            className="object-cover opacity-30 animate-slideInLeft"
           />
         </div>
 
@@ -100,7 +100,7 @@ export default function Hero() {
               alt="Momo"
               width={280}
               height={180}
-              className="relative z-20 object-contain"
+              className="relative z-20 object-contain animate-slideInRight"
             />
           </div>
         </div>
@@ -113,7 +113,7 @@ export default function Hero() {
               alt="Manchurian Small"
               width={170}
               height={140}
-              className="relative z-20 object-contain"
+              className="relative z-20 object-contain animate-slideInRight"
             />
           </div>
         </div>
@@ -131,9 +131,9 @@ export default function Hero() {
             <Image
               src="/images/home-page/kajukatli.png"
               alt="Kaju Katli"
-              width={160}
+              width={200}
               height={120}
-              className="absolute top-5 left-[-35%] z-20 object-contain"
+              className="absolute top-5 left-[-35%] z-20 object-contain animate-slideInRight"
             />
           </div>
         </div>
@@ -152,9 +152,9 @@ export default function Hero() {
               src="/images/home-page/Panjeri-Ladoo.png"
               alt="Panjeri Ladoo"
               width={600}
-              height={140}
-              className="absolute bottom-0 left-[-35%] z-20"
-              style={{ width: '600px', height: 'auto' }}
+              height={300}
+              className="absolute bottom-0 left-[-66%] z-20 animate-slideInRight"
+              style={{ width: '300px', height: 'auto', maxWidth: 'none' }}
             />
             
           </div>
@@ -175,7 +175,7 @@ export default function Hero() {
               alt="Manchurian"
               width={280}
               height={160}
-              className="relative z-20 object-contain"
+              className="relative z-20 object-contain animate-slideInRight"
             />
           </div>
         </div>

@@ -1,4 +1,6 @@
+"use client";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 const dishes = [
   {
@@ -20,20 +22,41 @@ const dishes = [
 ];
 
 export default function Dishes() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
   return (
     <section
+      ref={sectionRef}
       className="relative py-16"
       style={{
         backgroundImage: 'url(/images/home-dish/background.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
+        height: '87vh'
       }}
     >
       <div className="container mx-auto px-6">
         {/* Title Section */}
         <div className="mb-12">
-          <div className="relative inline-block text-left">
+          <div className={`relative inline-block text-left ${isVisible ? 'animate-slideInLeftDelayed' : ''}`}>
             <span
               className="font-[family-name:var(--font-island-moments)] text-[var(--color-primary)] absolute"
               style={{ fontSize: '50px', top: '-30px', left: '0px' }}
@@ -57,7 +80,7 @@ export default function Dishes() {
               <div className="relative group">
                 {/* Orange background div - below circle, opacity 51% */}
                 <div
-                  className="absolute left-1/2 -translate-x-1/2 w-full transition-colors duration-300"
+                  className={`absolute left-1/2 -translate-x-1/2 w-full transition-colors duration-300 ${isVisible ? 'animate-slideUpFromBottom' : ''}`}
                   style={{
                     height: '225px',
                     top: '100px',
@@ -79,7 +102,7 @@ export default function Dishes() {
                 />
                 {/* Circle image - at top, no border, no background */}
                 <div
-                  className="relative z-10 rounded-full overflow-hidden"
+                  className={`relative z-10 rounded-full overflow-hidden ${isVisible ? 'animate-moveToPosition' : ''}`}
                   style={{ width: '200px', height: '200px' }}
                 >
                   <Image
@@ -105,15 +128,7 @@ export default function Dishes() {
         </div>
 
         {/* Menu Link */}
-        <div className="mt-8">
-          <a
-            href="/menu"
-            className="font-[family-name:var(--font-inter)] text-[#2d3a4a] hover:text-[var(--color-primary)] transition-colors"
-            style={{ fontSize: '14px', fontWeight: 500 }}
-          >
-            Menu
-          </a>
-        </div>
+       
       </div>
     </section>
   );
