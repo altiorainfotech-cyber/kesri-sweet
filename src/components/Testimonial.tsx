@@ -51,11 +51,11 @@ export default function Testimonial() {
   const current = testimonials[currentIndex];
 
   return (
-    <section className=" overflow-hidden">
+    <section className="overflow-hidden">
       <div className="flex flex-col lg:flex-row">
         {/* Left Side - Text Content - White Background */}
         <motion.div
-          className="w-full lg:w-[45%] px-6 lg:pl-20 lg:pr-10 bg-white pt-12"
+          className="w-full lg:w-[45%] px-4 md:px-6 lg:pl-20 lg:pr-10 bg-white pt-8 md:pt-10 lg:pt-12 pb-8 lg:pb-0"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -63,33 +63,30 @@ export default function Testimonial() {
         >
           {/* Orange Square Decoration */}
           <div
-            className="bg-[var(--color-primary)] mb-8"
+            className="bg-[var(--color-primary)] mb-4 md:mb-6 lg:mb-8 w-[30px] h-[25px] md:w-[35px] md:h-[28px] lg:w-[40px] lg:h-[30px]"
             style={{
-              width: '40px',
-              height: '30px',
               borderTopLeftRadius: '10px',
               borderBottomRightRadius: '10px',
             }}
           />
 
           {/* Title */}
-          <div className="relative mb-8 ">
+          <div className="relative mb-6 md:mb-7 lg:mb-8">
             <span
-              className="font-[family-name:var(--font-island-moments)] text-[var(--color-primary)]"
-              style={{ fontSize: '55px', display: 'block', marginBottom: '-35px', paddingLeft: '100px' }}
+              className="font-[family-name:var(--font-island-moments)] text-[var(--color-primary)] text-3xl md:text-4xl lg:text-5xl block mb-[-20px] md:mb-[-28px] lg:mb-[-35px] pl-16 md:pl-20 lg:pl-24"
             >
               Customer
             </span>
             <h2
-              className="text-[#2d3a4a]"
-              style={{ fontSize: '45px', fontWeight: 400, fontFamily: 'Inter, sans-serif' }}
+              className="text-[#2d3a4a] text-2xl md:text-3xl lg:text-4xl"
+              style={{ fontWeight: 400, fontFamily: 'Inter, sans-serif' }}
             >
               Reviews
             </h2>
           </div>
 
           {/* Testimonial Text - White background */}
-          <div className="bg-white p-4 " style={{ marginRight: '-117px', zIndex: 9999, position: 'relative', height: '150px', marginTop: '-20px' }}>
+          <div className="bg-white p-3 md:p-4 lg:mr-[-117px] z-[9999] relative min-h-[120px] md:min-h-[140px] lg:min-h-[150px] mt-0 lg:-mt-5">
             <AnimatePresence mode="wait">
               <motion.p
                 key={currentIndex}
@@ -97,8 +94,8 @@ export default function Testimonial() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className="leading-relaxed"
-                style={{ fontSize: '16px', color: '#444', lineHeight: '1.8' }}
+                className="leading-relaxed text-sm md:text-base"
+                style={{ color: '#444', lineHeight: '1.8' }}
               >
                 {current.text}
               </motion.p>
@@ -108,15 +105,14 @@ export default function Testimonial() {
 
         {/* Right Side - Image and Orange Section */}
         <motion.div
-          className="w-full lg:w-[55%] bg-[var(--color-primary)] pt-20"
-          style={{ minHeight: '63vh' }}
+          className="w-full lg:w-[55%] bg-[var(--color-primary)] pt-12 md:pt-16 lg:pt-20 pb-16 md:pb-20 lg:pb-0 min-h-[400px] md:min-h-[500px] lg:min-h-[63vh]"
           initial={{ scaleX: 0, transformOrigin: "left" }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
           {/* Content Container */}
-          <div className="h-full flex items-center justify-center">
+          <div className="h-full flex items-center justify-center flex-col lg:flex-row px-4 md:px-6 lg:px-0">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
@@ -124,31 +120,29 @@ export default function Testimonial() {
                 animate={{ opacity: 1, scaleX: 1 }}
                 exit={{ opacity: 0, scaleX: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="flex items-center justify-center w-full"
+                className="flex flex-col lg:flex-row items-center justify-center w-full"
               >
-                {/* Testimonial Image - With 150px left padding */}
-                <div style={{ marginLeft: '74px', zIndex: 9999, position: 'relative' }}>
+                {/* Testimonial Image */}
+                <div className="relative z-[9999] mb-8 lg:mb-0 lg:ml-[74px]">
                   <Image
                     src={current.image}
                     alt={current.name}
                     width={200}
                     height={200}
-                    style={{ width: '213px', height: '269px', objectFit: 'cover' }}
+                    className="w-[160px] h-[200px] md:w-[180px] md:h-[225px] lg:w-[213px] lg:h-[269px] object-cover"
                   />
 
                   {/* Navigation Arrows - Bottom of image */}
-                  <div className="flex gap-4 justify-center" style={{ position: 'absolute', bottom: '-40px', left: '50%', transform: 'translateX(-50%)' }}>
+                  <div className="flex gap-3 md:gap-4 justify-center absolute bottom-[-30px] md:bottom-[-35px] lg:bottom-[-40px] left-1/2 -translate-x-1/2">
                     <button
                       onClick={prevTestimonial}
-                      className="text-white hover:opacity-70 transition-opacity"
-                      style={{ fontSize: '24px' }}
+                      className="text-white hover:opacity-70 transition-opacity text-xl md:text-2xl"
                     >
                       ‹
                     </button>
                     <button
                       onClick={nextTestimonial}
-                      className="text-white hover:opacity-70 transition-opacity"
-                      style={{ fontSize: '24px' }}
+                      className="text-white hover:opacity-70 transition-opacity text-xl md:text-2xl"
                     >
                       ›
                     </button>
@@ -156,23 +150,23 @@ export default function Testimonial() {
                 </div>
 
                 {/* Name and Rating - No background */}
-                <div style={{ marginRight: 'auto', marginLeft: '50px' }}>
+                <div className="text-center lg:text-left lg:mr-auto lg:ml-[50px] mt-8 lg:mt-0">
                   <h3
-                    className="font-bold mb-1"
-                    style={{ fontSize: '24px', color: '#000' }}
+                    className="font-bold mb-1 text-lg md:text-xl lg:text-2xl"
+                    style={{ color: '#000' }}
                   >
                     {current.name}
                   </h3>
                   <p
-                    className="mb-3"
-                    style={{ fontSize: '14px', color: '#000' }}
+                    className="mb-3 text-xs md:text-sm"
+                    style={{ color: '#000' }}
                   >
                     {current.name}
                   </p>
                   {/* Star Rating - White color */}
-                  <div className="flex gap-1 mb-8">
+                  <div className="flex gap-1 mb-4 lg:mb-8 justify-center lg:justify-start">
                     {[...Array(current.rating)].map((_, i) => (
-                      <span key={i} style={{ color: '#FFF', fontSize: '16px' }}>★</span>
+                      <span key={i} className="text-white text-sm md:text-base">★</span>
                     ))}
                   </div>
                 </div>

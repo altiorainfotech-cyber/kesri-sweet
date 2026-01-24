@@ -34,21 +34,21 @@ export default function About() {
       }}
     >
 
-      <div className="container mx-auto px-6 pt-25 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center gap-12">
+      <div className="container mx-auto px-4 md:px-6 py-12 md:py-16 lg:py-20 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-12">
           {/* Left Side - Food Image */}
-          <div className="w-full lg:w-1/2">
+          <div className="w-full lg:w-1/2 px-4 md:px-0">
             <Image
               src="/images/home-about/aboutleftside.png"
               alt="Delicious Indian Food"
               width={600}
               height={500}
-              className="object-contain"
+              className="object-contain w-full h-auto"
             />
           </div>
 
           {/* Right Side - Content */}
-          <div className="w-full lg:w-1/2 text-center lg:text-center relative" style={{ borderLeft: '3px solid #e1dddccf' }}>
+          <div className="w-full lg:w-1/2 text-center lg:text-center relative lg:border-l-[3px] border-[#e1dddccf]">
             {/* Color overlay that slides away */}
             <div 
               className={`absolute inset-0 z-20 ${isVisible ? 'animate-slideOutRight' : ''}`}
@@ -57,14 +57,14 @@ export default function About() {
             {/* The Taste + Behind Us - connected layout like Figma */}
             <div className="relative inline-block text-left">
               <span
-                className="font-[family-name:var(--font-island-moments)] text-[var(--color-primary)] absolute"
-                style={{ fontSize: '70px', top: '-38px', left: '-22px' }}
+                className="font-[family-name:var(--font-island-moments)] text-[var(--color-primary)] absolute text-4xl md:text-5xl lg:text-6xl"
+                style={{ top: '-20px', left: '-10px' }}
               >
                 The Taste
               </span>
               <h2
-                className="font-bold text-[#2d3a4a]"
-                style={{ fontSize: '48px', lineHeight: '1', paddingLeft: '120px', paddingTop: '15px' }}
+                className="font-bold text-[#2d3a4a] text-3xl md:text-4xl lg:text-5xl pl-16 md:pl-24 lg:pl-28 pt-2 md:pt-3"
+                style={{ lineHeight: '1' }}
               >
                 Behind Us
               </h2>
@@ -72,14 +72,10 @@ export default function About() {
 
             {/* Description */}
             <div
-              className={`mt-6 text-gray-600 max-w-lg mx-auto font-[family-name:var(--font-inter)] ${isVisible ? 'animate-slideInRight' : ''}`}
-              style={{ 
-                fontSize: '16px', 
-                fontWeight: 400, 
-                lineHeight: '1.7',
-                border: '2px solid #e1dddccf',
-                padding: '20px',
-                borderRadius: '8px'
+              className={`mt-6 md:mt-8 text-gray-600 max-w-lg mx-auto font-[family-name:var(--font-inter)] text-sm md:text-base border-2 border-[#e1dddccf] p-4 md:p-5 rounded-lg ${isVisible ? 'animate-slideInRight' : ''}`}
+              style={{
+                fontWeight: 400,
+                lineHeight: '1.7'
               }}
             >
               <p>

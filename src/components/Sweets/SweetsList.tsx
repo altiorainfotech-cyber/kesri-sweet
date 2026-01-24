@@ -3,12 +3,17 @@
 import Image from "next/image";
 import { useState } from "react";
 
+interface SweetVariant {
+    weight: string;
+    price: number;
+}
+
 interface Sweet {
     id: number;
     name: string;
     image: string;
     description: string;
-    price: number;
+    variants: SweetVariant[];
 }
 
 const sweetsData: Sweet[] = [
@@ -17,31 +22,55 @@ const sweetsData: Sweet[] = [
         name: "Coconut Sweet",
         image: "/images/sweets/coconut.png",
         description: "Tradition wrapped in tropical flavour, crafted to melt gently on your palate.",
-        price: 2.50,
+        variants: [
+            { weight: "250g", price: 8.00 },
+            { weight: "500g", price: 15.00 },
+            { weight: "1kg", price: 28.00 },
+        ]
     },
     {
         id: 2,
         name: "Phool Patisa",
         image: "/images/sweets/Phool-Patisa.png",
         description: "Tradition wrapped in tropical flavour, crafted to melt gently on your palate.",
-        price: 2.50,
+        variants: [
+            { weight: "250g", price: 8.00 },
+            { weight: "500g", price: 15.00 },
+            { weight: "1kg", price: 28.00 },
+        ]
     },
     {
         id: 3,
         name: "Malai Chop",
         image: "/images/sweets/Malai-Chop.png",
         description: "Tradition wrapped in tropical flavour, crafted to melt gently on your palate.",
-        price: 2.50,
+        variants: [
+            { weight: "250g", price: 8.00 },
+            { weight: "500g", price: 15.00 },
+            { weight: "1kg", price: 28.00 },
+        ]
     },
 ];
 
 export default function SweetsList() {
+    // State for selected variants, initialized with the first variant for each sweet
+    const [selectedVariants, setSelectedVariants] = useState<{ [key: number]: SweetVariant }>(
+        sweetsData.reduce((acc, sweet) => ({ ...acc, [sweet.id]: sweet.variants[0] }), {})
+    );
+
     // Local state to track quantities for each item
     const [quantities, setQuantities] = useState<{ [key: number]: number }>({
         1: 1,
         2: 1,
         3: 1,
     });
+
+    const handleVariantChange = (id: number, variant: SweetVariant) => {
+        setSelectedVariants(prev => ({
+            ...prev,
+            [id]: variant
+        }));
+    };
 
     const handleQuantityChange = (id: number, delta: number) => {
         setQuantities(prev => ({
@@ -88,7 +117,7 @@ export default function SweetsList() {
 
                                 {/* Image Section */}
                                 <div className="md:ml-[300px] relative z-20 flex-shrink-0">
-                                    <div className="relative w-[280px] h-[280px] md:w-[320px] md:h-[320px] rounded-tr-[40px] rounded-bl-[40px] overflow-hidden shadow-xl">
+                                    <div className="relative w-[200px] h-[200px] rounded-tr-[40px] rounded-bl-[40px] overflow-hidden shadow-xl">
                                         <Image
                                             src={sweet.image}
                                             alt={sweet.name}
@@ -99,18 +128,34 @@ export default function SweetsList() {
                                 </div>
 
                                 {/* Content Section */}
-                                <div className="flex-1 flex flex-col xl:flex-row justify-between items-start pt-4 md:pt-0 gap-6 min-w-0">
-                                    <div className="flex-1 max-w-md">
+                                <div className="flex-1 flex flex-col xl:flex-row justify-between items-center md:items-start pt-4 md:pt-0 gap-6 min-w-0">
+                                    <div className="flex-1 max-w-md text-center md:text-left">
                                         <h3 className="text-2xl text-orange-400 font-semibold mb-2">{sweet.name}</h3>
-                                        <div className="h-px w-24 bg-gray-400 mb-4"></div>
+                                        <div className="h-px w-24 bg-gray-400 mb-4 mx-auto md:mx-0"></div>
                                         <p className="text-gray-700 text-base leading-relaxed">
                                             {sweet.description}
                                         </p>
                                     </div>
 
-                                    <div className="flex flex-col items-start gap-4 mt-4 xl:mt-0 flex-shrink-0">
+                                    <div className="flex flex-col items-center md:items-start gap-4 mt-4 xl:mt-0 flex-shrink-0">
+                                        {/* Weight Selection */}
+                                        <div className="flex gap-2 mb-1">
+                                            {sweet.variants.map((variant) => (
+                                                <button
+                                                    key={variant.weight}
+                                                    onClick={() => handleVariantChange(sweet.id, variant)}
+                                                    className={`px-3 py-1 text-xs sm:text-sm rounded-lg border transition-all ${selectedVariants[sweet.id]?.weight === variant.weight
+                                                        ? 'bg-orange-400 text-black border-orange-400 font-medium shadow-sm'
+                                                        : 'bg-transparent text-gray-600 border-gray-300 hover:border-orange-400'
+                                                        }`}
+                                                >
+                                                    {variant.weight}
+                                                </button>
+                                            ))}
+                                        </div>
+
                                         <div className="text-black font-semibold text-lg">
-                                            CAD${sweet.price.toFixed(2)}
+                                            CAD${selectedVariants[sweet.id]?.price.toFixed(2)}
                                         </div>
 
                                         <div className="flex items-center gap-4">

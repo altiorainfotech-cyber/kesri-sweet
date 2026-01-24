@@ -3,61 +3,83 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "Sweets", href: "/sweets" },
+  { name: "Order", href: "/order" },
+  { name: "Catering", href: "/catering" },
+];
+
 export default function HeaderOther() {
   const [cartCount] = useState(2);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="w-full py-4 px-6" style={{ backgroundColor: "#F4F0EF" }}>
+    <header className="relative w-full py-4 px-6" style={{ backgroundColor: "#F4F0EF" }}>
       <div className="container mx-auto">
         {/* First Row: Logo and Navigation */}
-        <div className="flex items-center mb-3">
+        <div className="flex items-center justify-between mb-3">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <div className="relative w-12 h-12">
+            <div className="relative w-25 h-16">
               <Image
                 src="/logo.png"
                 alt="Kesri Sweets Logo"
-                width={48}
-                height={48}
+                width={62}
+                height={55}
                 className="object-contain"
               />
             </div>
           </Link>
 
-          {/* Navigation Menu - Centered */}
-          <nav className="flex items-center gap-8 mx-auto">
-            <Link
-              href="/sweets"
-              className="text-[#2d3a4a] hover:text-[var(--color-primary)] font-medium text-base transition-colors"
-            >
-              Sweets
-            </Link>
-            <Link
-              href="/food"
-              className="text-[#2d3a4a] hover:text-[var(--color-primary)] font-medium text-base transition-colors"
-            >
-              Food
-            </Link>
-            <Link
-              href="/order"
-              className="text-[var(--color-primary)] font-semibold text-base transition-colors"
-            >
-              Order
-            </Link>
-            <Link
-              href="/catering"
-              className="text-[#2d3a4a] hover:text-[var(--color-primary)] font-medium text-base transition-colors"
-            >
-              Catering
-            </Link>
+          {/* Desktop Navigation Menu - Centered */}
+          <nav className="hidden md:flex items-center gap-8 mx-auto">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-[#2d3a4a] hover:text-[var(--color-primary)] font-medium text-base transition-colors"
+              >
+                {link.name}
+              </Link>
+            ))}
           </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 hover:bg-gray-200/50 rounded-full transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="w-6 h-6 text-gray-700"
+            >
+              {isMobileMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              )}
+            </svg>
+          </button>
         </div>
 
         {/* Second Row: Pickup Location and Cart - Centered */}
         <div className="flex items-center justify-center gap-3">
           <div className="relative flex items-center gap-3">
             <span
-              className="text-black italic font-[family-name:var(--font-island-moments)]"
+              className="text-black italic font-[family-name:var(--font-island-moments)] hidden sm:block"
               style={{
                 fontSize: "20px",
                 transform: "rotate(-15deg)",
@@ -99,6 +121,43 @@ export default function HeaderOther() {
           </Link>
         </div>
       </div>
+
+      {/* Mobile Menu Backdrop */}
+      {isMobileMenuOpen && (
+        <div
+          className="md:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 w-screen bg-white shadow-2xl z-50 animate-growLeftToRight overflow-hidden">
+          <nav className="flex flex-col p-6 max-w-full">
+            {navLinks.map((link, index) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="group relative text-gray-700 hover:text-[var(--color-primary)] transition-all duration-300 font-medium py-4 px-4 rounded-lg hover:bg-orange-50"
+                onClick={() => setIsMobileMenuOpen(false)}
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
+                <span className="relative z-10">{link.name}</span>
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-[var(--color-primary)] group-hover:h-8 transition-all duration-300 rounded-r"></div>
+              </Link>
+            ))}
+
+            {/* Decorative element */}
+            <div className="mt-4 pt-4 border-t border-gray-200">
+              <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
+                <div className="w-8 h-0.5 bg-gradient-to-r from-transparent via-[var(--color-primary)] to-transparent"></div>
+                <span>Kesri Sweets</span>
+                <div className="w-8 h-0.5 bg-gradient-to-r from-transparent via-[var(--color-primary)] to-transparent"></div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

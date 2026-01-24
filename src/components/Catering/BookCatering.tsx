@@ -88,7 +88,11 @@ export default function BookCatering() {
           {/* Form Header */}
           <div
             className="text-center py-4 px-6"
-            style={{ backgroundColor: '#F5C26B', borderRadius: '10px' }}
+            style={{
+              backgroundColor: '#F5C26B',
+              borderTopLeftRadius: '20px',
+              borderBottomRightRadius: '20px'
+            }}
           >
             <h3 className="text-xl font-semibold text-black">
               Catering Request and Enquiry Form
@@ -226,8 +230,7 @@ export default function BookCatering() {
               className="px-12 py-3 font-semibold text-black"
               style={{
                 backgroundColor: '#F5C26B',
-                borderTopLeftRadius: '10px',
-                borderBottomLeftRadius: '10px'
+                borderTopLeftRadius: '20px'
               }}
             >
               Clear Form
@@ -237,8 +240,7 @@ export default function BookCatering() {
               className="px-12 py-3 font-semibold text-black"
               style={{
                 backgroundColor: '#FF9900',
-                borderTopRightRadius: '10px',
-                borderBottomRightRadius: '10px'
+                borderBottomRightRadius: '20px'
               }}
             >
               Submit

@@ -6,6 +6,7 @@ import WhyChoose from "@/components/Catering/WhyChoose";
 import CateringMenu from "@/components/Catering/CateringMenu";
 import BookCatering from "@/components/Catering/BookCatering";
 import Wedding from "@/components/Catering/Wedding";
+import WeddingTwo from "@/components/Catering/WeddingTwo";
 import Footer from "@/components/Footer";
 
 export default function CateringPage() {
@@ -13,7 +14,7 @@ export default function CateringPage() {
         <>
             <HeaderOther />
             <CateringService />
-            <Wedding />
+            <WeddingTwo />
             <WhyChoose />
             <CateringMenu />
             <BookCatering />

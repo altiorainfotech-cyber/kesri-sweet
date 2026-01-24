@@ -42,19 +42,17 @@ export default function Choose() {
 
   return (
     <>
-      <section ref={sectionRef} className="py-20 overflow-hidden" style={{ backgroundColor: '#F4F0EF' }}>
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+      <section ref={sectionRef} className="py-12 md:py-16 lg:py-20 overflow-hidden" style={{ backgroundColor: '#F4F0EF' }}>
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-10 lg:gap-8">
             {/* Left Side - Image Collage */}
-            <div className="relative w-full lg:w-[55%] h-[420px]">
+            <div className="relative w-full lg:w-[55%] h-[300px] md:h-[380px] lg:h-[420px]">
               {/* Orange Square Decoration - border only top-left and bottom-right */}
               <div
-                className="absolute bg-[var(--color-primary)]"
+                className="absolute bg-[var(--color-primary)] w-[30px] h-[25px] md:w-[35px] md:h-[28px] lg:w-[40px] lg:h-[30px]"
                 style={{
-                  width: '40px',
-                  height: '30px',
-                  top: '10px',
-                  left: '40px',
+                  top: '5px',
+                  left: '20px',
                   borderTopLeftRadius: '10px',
                   borderBottomRightRadius: '10px',
                 }}
@@ -62,13 +60,7 @@ export default function Choose() {
 
               {/* Left Image - Small sweets - NO border radius */}
               <div
-                className={`absolute overflow-hidden z-20 ${isVisible ? 'animate-growLeftToRight' : ''}`}
-                style={{
-                  width: '150px',
-                  height: '130px',
-                  top: '180px',
-                  left: '30px',
-                }}
+                className={`absolute overflow-hidden z-20 ${isVisible ? 'animate-growLeftToRight' : ''} w-[110px] h-[95px] md:w-[130px] md:h-[110px] lg:w-[150px] lg:h-[130px] top-[140px] md:top-[160px] lg:top-[180px] left-[15px] md:left-[25px] lg:left-[30px]`}
               >
                 <Image
                   src="/images/home-choose/left.png"
@@ -80,13 +72,7 @@ export default function Choose() {
 
               {/* Center Image - Paratha/Main dish - BEHIND other images - NO border radius */}
               <div
-                className={`absolute overflow-hidden z-10 ${isVisible ? 'animate-growLeftToRight' : ''}`}
-                style={{
-                  width: '280px',
-                  height: '343px',
-                  top: '30px',
-                  left: '130px',
-                }}
+                className={`absolute overflow-hidden z-10 ${isVisible ? 'animate-growLeftToRight' : ''} w-[210px] h-[260px] md:w-[240px] md:h-[300px] lg:w-[280px] lg:h-[343px] top-[20px] md:top-[25px] lg:top-[30px] left-[90px] md:left-[110px] lg:left-[130px]`}
               >
                 <Image
                   src="/images/home-choose/center.png"
@@ -98,13 +84,7 @@ export default function Choose() {
 
               {/* Right Image - Basket of sweets - NO border radius */}
               <div
-                className={`absolute overflow-hidden z-20 ${isVisible ? 'animate-growLeftToRight' : ''}`}
-                style={{
-                  width: '170px',
-                  height: '190px',
-                  top: '100px',
-                  left: '350px',
-                }}
+                className={`absolute overflow-hidden z-20 ${isVisible ? 'animate-growLeftToRight' : ''} w-[130px] h-[145px] md:w-[150px] md:h-[165px] lg:w-[170px] lg:h-[190px] top-[75px] md:top-[85px] lg:top-[100px] left-[260px] md:left-[300px] lg:left-[350px]`}
               >
                 <Image
                   src="/images/home-choose/right.png"
@@ -120,21 +100,21 @@ export default function Choose() {
             <div className="w-full lg:w-[45%] lg:pl-8 text-center flex flex-col items-center">
               <div className="relative">
                 <span
-                  className="font-[family-name:var(--font-island-moments)] text-[var(--color-primary)] absolute"
-                  style={{ fontSize: '55px', top: '-1%', left: '-21%' }}
+                  className="font-[family-name:var(--font-island-moments)] text-[var(--color-primary)] absolute text-3xl md:text-4xl lg:text-5xl"
+                  style={{ top: '-1%', left: '-21%' }}
                 >
                   Choose
                 </span>
                 <h2
-                  className="font-serif text-[#2d3a4a]"
-                  style={{ fontSize: '40px', fontWeight: 400, lineHeight: '1.2', paddingTop: '30px' }}
+                  className="font-serif text-[#2d3a4a] text-2xl md:text-3xl lg:text-4xl pt-6 md:pt-7 lg:pt-8"
+                  style={{ fontWeight: 400, lineHeight: '1.2' }}
                 >
                   your favourite
                 </h2>
               </div>
               <p
-                className="my-6 leading-relaxed text-center"
-                style={{ fontSize: '18px', color: '#000000' }}
+                className="my-4 md:my-5 lg:my-6 leading-relaxed text-center text-sm md:text-base lg:text-lg px-4 md:px-0"
+                style={{ color: '#000000' }}
               >
                 A glimpse into our kitchen, our tables, and our stories.
                 <br />
@@ -142,14 +122,13 @@ export default function Choose() {
               </p>
               <button
                 onClick={() => setShowGallery(!showGallery)}
-                className="text-white font-medium transition-all duration-300 hover:opacity-90"
+                className="text-white font-medium transition-all duration-300 hover:opacity-90 text-xs md:text-sm"
                 style={{
-                  fontSize: '14px',
                   backgroundColor: '#FF8400',
                   borderTopLeftRadius: '20px',
                   borderBottomRightRadius: '20px',
                   boxShadow: '0 4px 15px rgba(255, 132, 0, 0.4)',
-                  padding: showGallery ? '10px 20px' : '10px 28px',
+                  padding: showGallery ? '8px 16px' : '8px 20px',
                 }}
               >
                 {showGallery ? (
@@ -183,7 +162,7 @@ export default function Choose() {
         }}
       >
         <section
-          className="relative py-16"
+          className="relative py-8 md:py-12 lg:py-16"
           style={{
             backgroundImage: 'url(/images/home-choose/gallery/gallerysection-background%20.png)',
             backgroundSize: 'cover',
@@ -193,136 +172,134 @@ export default function Choose() {
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-black/60" />
 
-          <div className="container mx-auto px-6 relative z-10">
-            {/* Gallery Grid - 4 columns */}
-            <div className="grid grid-cols-4 gap-3">
+          <div className="container mx-auto px-4 md:px-6 relative z-10">
+            {/* Gallery Grid - 2 columns on mobile, 4 columns on desktop */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-2.5 lg:gap-3">
               {/* Column 1 */}
-              <div className="flex flex-col gap-3">
-                <div className="overflow-hidden">
+              <div className="flex flex-col gap-2 md:gap-2.5 lg:gap-3">
+                <div className="overflow-hidden rounded-sm">
                   <Image
                     src="/images/home-choose/gallery/gallery1.png"
                     alt="Paratha"
                     width={0}
                     height={0}
                     sizes="100vw"
-                    style={{ width: '100%', height: '89%' }}
+                    style={{ width: '100%', height: 'auto' }}
                   />
                 </div>
-                <div className="overflow-hidden">
+                <div className="overflow-hidden rounded-sm">
                   <Image
                     src="/images/home-choose/gallery/gallery9.png"
                     alt="Paratha"
                     width={0}
                     height={0}
                     sizes="100vw"
-                    style={{ width: '100%', height: '89%' }}
+                    style={{ width: '100%', height: 'auto' }}
                   />
                 </div>
-              
+
               </div>
 
               {/* Column 2 */}
-
-              <div className="flex flex-col gap-3">
-
-                  <div className="overflow-hidden">
+              <div className="flex flex-col gap-2 md:gap-2.5 lg:gap-3">
+                <div className="overflow-hidden rounded-sm">
                   <Image
                     src="/images/home-choose/gallery/momo.png"
                     alt="Chaat"
                     width={0}
                     height={0}
                     sizes="100vw"
-                    style={{ width: '100%', height: '89%' }}
+                    style={{ width: '100%', height: 'auto' }}
                   />
                 </div>
-                
-                <div className="overflow-hidden">
+
+                <div className="overflow-hidden rounded-sm">
                   <Image
                     src="/images/home-choose/gallery/gallery4.png"
                     alt="Pink Sweets"
                     width={0}
                     height={0}
                     sizes="100vw"
-                    style={{ width: '100%', height: '89%' }}
+                    style={{ width: '100%', height: 'auto' }}
                   />
                 </div>
-                <div className="overflow-hidden">
+                <div className="overflow-hidden rounded-sm">
                   <Image
                     src="/images/home-choose/gallery/gallery5.png"
                     alt="Vegetables"
                     width={0}
                     height={0}
                     sizes="100vw"
-                    style={{ width: '100%', height: '89%' }}
+                    style={{ width: '100%', height: 'auto' }}
                   />
                 </div>
-                <div className="overflow-hidden">
+                <div className="overflow-hidden rounded-sm">
                   <Image
                     src="/images/home-choose/gallery/gallery3.png"
                     alt="Kebab"
                     width={0}
                     height={0}
                     sizes="100vw"
-                    style={{ width: '100%', height: '89%' }}
+                    style={{ width: '100%', height: 'auto' }}
                   />
                 </div>
               </div>
 
               {/* Column 3 */}
-              <div className="flex flex-col gap-3">
-                <div className="overflow-hidden">
+              <div className="flex flex-col gap-2 md:gap-2.5 lg:gap-3">
+                <div className="overflow-hidden rounded-sm">
                   <Image
                     src="/images/home-choose/gallery/gallery6.png"
                     alt="Biryani"
                     width={0}
                     height={0}
                     sizes="100vw"
-                    style={{ width: '100%', height: '89%' }}
+                    style={{ width: '100%', height: 'auto' }}
                   />
                 </div>
-                <div className="overflow-hidden">
+                <div className="overflow-hidden rounded-sm">
                   <Image
                     src="/images/home-choose/gallery/gallery7.png"
                     alt="Curry"
                     width={0}
                     height={0}
                     sizes="100vw"
-                    style={{ width: '100%', height: '89%' }}
+                    style={{ width: '100%', height: 'auto' }}
                   />
                 </div>
-                
+
               </div>
 
               {/* Column 4 */}
-              <div className="flex flex-col gap-3">
-                <div className="overflow-hidden">
+              <div className="flex flex-col gap-2 md:gap-2.5 lg:gap-3">
+                <div className="overflow-hidden rounded-sm">
                   <Image
                     src="/images/home-choose/gallery/gallery10.png"
                     alt="Green Drink"
                     width={0}
                     height={0}
                     sizes="100vw"
-                    style={{ width: '100%', height: '89%' }}
+                    style={{ width: '100%', height: 'auto' }}
                   />
                 </div>
-                <div className="overflow-hidden">
+                <div className="overflow-hidden rounded-sm">
                   <Image
                     src="/images/home-choose/gallery/gallery12.png"
                     alt="Dal"
                     width={0}
                     height={0}
                     sizes="100vw"
-                    style={{ width: '100%', height: '89%' }}
+                    style={{ width: '100%', height: 'auto' }}
                   />
                 </div>
-                <div className="overflow-hidden">
+                <div className="overflow-hidden rounded-sm">
                   <Image
                     src="/images/home-choose/gallery/gallery13.png"
                     alt="Ladoo"
                     width={0}
                     height={0}
                     sizes="100vw"
-                    style={{ width: '100%', height: '89%' }}
+                    style={{ width: '100%', height: 'auto' }}
                   />
                 </div>
               </div>

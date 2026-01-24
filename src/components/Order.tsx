@@ -51,39 +51,38 @@ export default function Order() {
     >
       {/* Category Navigation - Full Width */}
       <div className="mb-8 bg-white/95 backdrop-blur-sm py-3 px-6 flex flex-wrap gap-6 items-center justify-center w-full">
-          {menuCategories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`text-sm font-medium transition-all relative pb-1 cursor-pointer ${
-                activeCategory === category
-                  ? "text-[var(--color-primary)] font-semibold"
-                  : "text-[#2d3a4a] hover:text-[var(--color-primary)]"
+        {menuCategories.map((category) => (
+          <button
+            key={category}
+            onClick={() => setActiveCategory(category)}
+            className={`text-sm font-medium transition-all relative pb-1 cursor-pointer ${activeCategory === category
+              ? "text-[var(--color-primary)] font-semibold"
+              : "text-[#2d3a4a] hover:text-[var(--color-primary)]"
               }`}
-            >
-              {category}
-              {activeCategory === category && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--color-primary)]"></span>
-              )}
-            </button>
-          ))}
-          <button className="ml-auto p-2 hover:bg-gray-100 rounded-full cursor-pointer">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-gray-600"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
+          >
+            {category}
+            {activeCategory === category && (
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--color-primary)]"></span>
+            )}
           </button>
-        </div>
+        ))}
+        <button className="ml-auto p-2 hover:bg-gray-100 rounded-full cursor-pointer">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 text-gray-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </button>
+      </div>
 
       <div className="container mx-auto px-6">
         {/* Title Section */}
@@ -121,9 +120,8 @@ export default function Order() {
                     <div key={item.id} className="flex items-center gap-4">
                       {/* Image Section */}
                       <div
-                        className={`flex-shrink-0 ${
-                          isImageRight ? "order-2" : "order-1"
-                        }`}
+                        className={`flex-shrink-0 ${isImageRight ? "order-2" : "order-1"
+                          }`}
                         style={{ width: "35%" }}
                       >
                         <div className="relative w-full aspect-square max-w-[200px] mx-auto">
@@ -141,9 +139,8 @@ export default function Order() {
 
                       {/* Content Section */}
                       <div
-                        className={`flex flex-col ${
-                          isImageRight ? "order-1" : "order-2"
-                        }`}
+                        className={`flex flex-col ${isImageRight ? "order-1" : "order-2"
+                          }`}
                         style={{ width: "65%" }}
                       >
                         {/* Item Name */}
@@ -154,7 +151,7 @@ export default function Order() {
                         {/* Price and Quantity Controls */}
                         <div className="flex items-center justify-between mb-2">
                           {/* Price */}
-                          <p className="text-black text-base font-medium">
+                          <p className="text-black text-base font-medium mr-[10px]">
                             {item.priceRange ||
                               `CAD$${item.price.toFixed(2)}`}
                           </p>
@@ -228,7 +225,7 @@ export default function Order() {
       </div>
 
       {/* Cart Notification */}
-      <div className="text-black px-6 flex items-center justify-between absolute right-0 bottom-0" style={{ backgroundColor: "#FF8400", width: "400px", height: "38px", borderRadius: "8px 0 0 0" }}>
+      <div className="text-black px-6 flex items-center justify-between absolute right-0 bottom-0 w-[265px] md:w-[400px]" style={{ backgroundColor: "#FF8400", height: "38px", borderRadius: "8px 0 0 0" }}>
         <span className="font-normal text-base">
           {cartItems} Item{cartItems > 1 ? "s" : ""} Added
         </span>
