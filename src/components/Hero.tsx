@@ -3,26 +3,26 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex" style={{backgroundImage: 'url(/images/home-page/hero-section-bg.png)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
+    <section className="relative min-h-[80vh] lg:min-h-screen flex overflow-hidden" style={{backgroundImage: 'url(/images/home-page/hero-section-bg.png)', backgroundSize: 'cover', backgroundPosition: 'top'}}>
       {/* Left Side - Content */}
-      <div className="w-full lg:w-1/2 relative bg-[var(--color-cream)] flex items-center">
+      <div className="w-full lg:w-1/2 relative flex items-center">
         {/* Left side background image */}
         <div className="absolute inset-0">
           <Image
             src="/images/home-page/leftside-kaju-katli-bg.png"
             alt="Background"
             fill
-            className="object-cover opacity-30"
+            className="object-cover opacity-30 animate-slideInLeft"
           />
         </div>
 
         {/* Content */}
-        <div className="relative z-10 px-8 lg:px-16 py-32">
+        <div className="relative z-10 px-6 md:px-8 lg:px-16 py-20 md:py-32">
           {/* Because - rotated text */}
           <div className="mb-1">
             <span
-              className="font-[family-name:var(--font-island-moments)] text-[var(--color-primary)] inline-block"
-              style={{ fontSize: '48px', transform: 'rotate(-9deg)', transformOrigin: 'left center' }}
+              className="font-[family-name:var(--font-island-moments)] text-[var(--color-primary)] inline-block text-4xl lg:text-5xl"
+              style={{ transform: 'rotate(-9deg)', transformOrigin: 'left center' }}
             >
               Because
             </span>
@@ -30,18 +30,17 @@ export default function Hero() {
 
           {/* GREAT FOOD NEEDS - one line */}
           <h1
-            className="font-bold text-[#2d3a4a] tracking-tight whitespace-nowrap"
-            style={{ fontSize: '48px', lineHeight: '1.1', marginTop:'-34px' }}
+            className="font-bold text-[#2d3a4a] tracking-tight text-3xl lg:text-5xl -mt-4 md:-mt-8 lg:-mt-8"
+            style={{ lineHeight: '1.1' }}
           >
-            
             GREAT FOOD NEEDS
           </h1>
 
           {/* no occasion - right aligned, Inter 36px 400 */}
           <div className="text-right">
             <span
-              className="font-[family-name:var(--font-inter)] text-[#2d3a4a] "
-              style={{ fontSize: '36px', fontWeight: 400 }}
+              className="font-[family-name:var(--font-inter)] text-[#2d3a4a] text-xl md:text-2xl lg:text-4xl"
+              style={{ fontWeight: 400 }}
             >
               no occasion
             </span>
@@ -49,16 +48,16 @@ export default function Hero() {
 
           {/* Description - Inter 20px 400 */}
           <p
-            className="mt-6 text-gray-600 max-w-md font-[family-name:var(--font-inter)]"
-            style={{ fontSize: '16px', fontWeight: 400 }}
+            className="mt-4 md:mt-6 text-gray-600 max-w-md font-[family-name:var(--font-inter)] text-sm md:text-base"
+            style={{ fontWeight: 400 }}
           >
             Kesari – Best Indian Restaurant in Surrey for Authentic Sweets & Eats
           </p>
 
           {/* Button - bg #FF9900, border-radius 20px */}
           <Link
-            href="/menu"
-            className="inline-block mt-6 px-8 py-3 text-white font-medium hover:opacity-90 transition-opacity"
+            href="/order"
+            className="inline-block mt-4 md:mt-6 px-6 md:px-8 py-2 md:py-3 text-white font-medium hover:opacity-90 transition-opacity text-sm md:text-base"
             style={{ backgroundColor: '#FF8400', borderBottomRightRadius:'20px', borderTopLeftRadius:'20px' }}
           >
             Explore Menu
@@ -100,7 +99,7 @@ export default function Hero() {
               alt="Momo"
               width={280}
               height={180}
-              className="relative z-20 object-contain"
+              className="relative z-20 object-contain animate-slideInRight"
             />
           </div>
         </div>
@@ -113,7 +112,7 @@ export default function Hero() {
               alt="Manchurian Small"
               width={170}
               height={140}
-              className="relative z-20 object-contain"
+              className="relative z-20 object-contain animate-slideInRight"
             />
           </div>
         </div>
@@ -131,9 +130,9 @@ export default function Hero() {
             <Image
               src="/images/home-page/kajukatli.png"
               alt="Kaju Katli"
-              width={160}
+              width={200}
               height={120}
-              className="absolute top-5 left-[-35%] z-20 object-contain"
+              className="absolute top-5 left-[-35%] z-20 object-contain animate-slideInRight"
             />
           </div>
         </div>
@@ -152,9 +151,9 @@ export default function Hero() {
               src="/images/home-page/Panjeri-Ladoo.png"
               alt="Panjeri Ladoo"
               width={600}
-              height={140}
-              className="absolute bottom-0 left-[-35%] z-20"
-              style={{ width: '600px', height: 'auto' }}
+              height={300}
+              className="absolute bottom-0 left-[-66%] z-20 animate-slideInRight"
+              style={{ width: '300px', height: 'auto', maxWidth: 'none' }}
             />
             
           </div>
@@ -175,7 +174,7 @@ export default function Hero() {
               alt="Manchurian"
               width={280}
               height={160}
-              className="relative z-20 object-contain"
+              className="relative z-20 object-contain animate-slideInRight"
             />
           </div>
         </div>
