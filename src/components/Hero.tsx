@@ -24,7 +24,7 @@ export default function Hero() {
         </div>
 
         {/* Mobile/Tablet Images - Top Right Corner */}
-        <div className="absolute top-[20%] right-2 md:right-8 flex lg:hidden items-start gap-3 z-20">
+        <div className="absolute top-[18%] right-2 md:right-8 flex lg:hidden items-start gap-3 z-20">
           {/* Left Image - Manchurian Small */}
           <div className="relative">
             <Image
