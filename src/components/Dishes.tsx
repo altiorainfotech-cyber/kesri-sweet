@@ -57,7 +57,7 @@ export default function Dishes() {
         <div className="mb-8 md:mb-10 lg:mb-12">
           <div className={`relative inline-block text-left ${isVisible ? 'animate-slideInLeftDelayed' : ''}`}>
             <span
-              className="font-[family-name:var(--font-island-moments)] text-[var(--color-primary)] absolute text-3xl md:text-4xl lg:text-5xl"
+              className="font-[family-name:var(--font-island-moments)] text-[var(--color-primary)] absolute text-3xl md:text-4xl lg:text-5xl opacity-100"
               style={{ top: '-15px', left: '0px' }}
             >
               Explore Our

@@ -2,11 +2,12 @@
 import Image from "next/image";
 import { useState, useMemo } from "react";
 import { menuData, menuCategories } from "@/data/menuData";
+import { useCart } from "@/context/CartContext";
 
 export default function Order() {
+  const { addToCart, getCartCount, removeFromCart } = useCart();
   const [activeCategory, setActiveCategory] = useState("Most Popular");
   const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
-  const [cartItems, setCartItems] = useState(0);
 
   // Filter menu items by active category
   const filteredItems = useMemo(() => {
@@ -29,14 +30,28 @@ export default function Order() {
     }));
   };
 
-  const handleAddToCart = (itemId: number) => {
-    const quantity = quantities[itemId] || 1;
-    setCartItems((prev) => prev + quantity);
+  const handleAddToCart = (item: any) => {
+    const quantity = quantities[item.id] || 1;
+    if (quantity === 0) return;
+
+    addToCart({
+      id: item.id,
+      name: item.name,
+      image: item.image,
+      weight: "Regular", // Default weight for non-sweet items
+      price: item.price,
+      quantity: quantity,
+    });
+
     // Reset quantity after adding to cart
     setQuantities((prev) => ({
       ...prev,
-      [itemId]: 1,
+      [item.id]: 1,
     }));
+  };
+
+  const handleRemoveFromCart = (item: any) => {
+    removeFromCart(item.id, "Regular");
   };
 
   return (
@@ -193,12 +208,15 @@ export default function Order() {
                         {/* Add to Cart with Delete Icon */}
                         <div className="flex items-center justify-between">
                           <button
-                            onClick={() => handleAddToCart(item.id)}
+                            onClick={() => handleAddToCart(item)}
                             className="text-black font-medium hover:text-[var(--color-primary)] transition-colors text-sm"
                           >
                             Add to Cart
                           </button>
-                          <button className="p-1 hover:bg-gray-100 rounded transition-colors">
+                          <button
+                            onClick={() => handleRemoveFromCart(item)}
+                            className="p-1 hover:bg-gray-100 rounded transition-colors"
+                          >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               className="h-4 w-4 text-black"
@@ -227,7 +245,7 @@ export default function Order() {
       {/* Cart Notification */}
       <div className="text-black px-6 flex items-center justify-between absolute right-0 bottom-0 w-[265px] md:w-[400px]" style={{ backgroundColor: "#FF8400", height: "38px", borderRadius: "8px 0 0 0" }}>
         <span className="font-normal text-base">
-          {cartItems} Item{cartItems > 1 ? "s" : ""} Added
+          {getCartCount()} Item{getCartCount() !== 1 ? "s" : ""} Added
         </span>
         <button className="font-normal text-base hover:underline transition-all">
           View Cart &gt;

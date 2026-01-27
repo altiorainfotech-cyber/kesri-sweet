@@ -46,7 +46,7 @@ body {
   }
   100% {
     transform: translateX(0);
-    opacity: 0.3;
+    opacity: 1;
   }
 }
 
@@ -79,8 +79,7 @@ body {
 }
 
 .animate-slideInLeftDelayed {
-  animation: slideInLeft 1.2s ease-out 2s forwards;
-  opacity: 0;
+  animation: slideInLeft 1.2s ease-out forwards;
   will-change: transform, opacity;
   transform: translate3d(0, 0, 0);
 }
