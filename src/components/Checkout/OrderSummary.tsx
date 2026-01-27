@@ -11,9 +11,7 @@ export default function OrderSummary() {
     const [customTipValue, setCustomTipValue] = useState<string>('');
     const [isExpanded, setIsExpanded] = useState(false);
 
-    // Address and Time state
-    const [address, setAddress] = useState("2-1990 152 Street Surrey BC V4A4N4 CA");
-    const [isEditingAddress, setIsEditingAddress] = useState(false);
+    // Pickup Time state
     const [pickupTime, setPickupTime] = useState("");
 
     useEffect(() => {
@@ -52,34 +50,8 @@ export default function OrderSummary() {
                     <Image src="/images/Location.png" alt="Location" width={20} height={20} className="mt-1 flex-shrink-0" />
                     <div className="flex-1">
                         <p className="text-black font-medium text-sm">Kesari Indian Sweets & Eats</p>
-                        {isEditingAddress ? (
-                            <div className="mt-1 flex gap-2">
-                                <input
-                                    type="text"
-                                    value={address}
-                                    onChange={(e) => setAddress(e.target.value)}
-                                    className="flex-1 border border-black rounded-md px-2 py-1 text-sm bg-white text-black outline-none focus:ring-1 focus:ring-orange-400"
-                                    autoFocus
-                                />
-                                <button
-                                    onClick={() => setIsEditingAddress(false)}
-                                    className="text-xs bg-orange-400 text-black px-2 py-1 rounded-md font-medium hover:bg-orange-500 transition-colors"
-                                >
-                                    Save
-                                </button>
-                            </div>
-                        ) : (
-                            <p className="text-gray-600 text-sm whitespace-pre-wrap">{address}</p>
-                        )}
+                        <p className="text-gray-600 text-sm whitespace-pre-wrap">2-1990 152 Street Surrey BC V4A4N4 CA</p>
                     </div>
-                    {!isEditingAddress && (
-                        <button
-                            onClick={() => setIsEditingAddress(true)}
-                            className="text-sm text-gray-500 font-medium hover:text-black transition-colors"
-                        >
-                            (Edit)
-                        </button>
-                    )}
                 </div>
 
                 <div className="flex items-start gap-3">
