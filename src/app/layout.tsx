@@ -17,6 +17,9 @@ const islandMoments = Island_Moments({
 export const metadata: Metadata = {
   title: "Kesri Sweets - Authentic Indian Sweets",
   description: "Discover authentic Indian sweets, catering services, and delicious menu options at Kesri Sweets.",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({
