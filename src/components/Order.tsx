@@ -1,13 +1,26 @@
 "use client";
 import Image from "next/image";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { menuData, menuCategories } from "@/data/menuData";
 import { useCart } from "@/context/CartContext";
 
 export default function Order() {
-  const { addToCart, getCartCount, removeFromCart } = useCart();
+  const router = useRouter();
+  const { cartItems, addToCart, updateQuantity, removeFromCart, getCartCount } = useCart();
   const [activeCategory, setActiveCategory] = useState("Most Popular");
   const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
+
+  // Initialize quantities from cart
+  useEffect(() => {
+    const qtys: { [key: number]: number } = {};
+    cartItems.forEach(item => {
+      if (item.weight === "Regular") {
+        qtys[item.id] = item.quantity;
+      }
+    });
+    setQuantities(qtys);
+  }, [cartItems]);
 
   // Filter menu items by active category
   const filteredItems = useMemo(() => {
@@ -23,35 +36,35 @@ export default function Order() {
     return rows;
   }, [filteredItems]);
 
-  const handleQuantityChange = (itemId: number, change: number) => {
+  const handleQuantityChange = (item: { id: number; name: string; image: string; price: number; }, change: number) => {
+    const currentQty = quantities[item.id] || 0;
+    const newQty = Math.max(0, currentQty + change);
+
     setQuantities((prev) => ({
       ...prev,
-      [itemId]: Math.max(1, (prev[itemId] || 1) + change),
+      [item.id]: newQty,
     }));
-  };
 
-  const handleAddToCart = (item: any) => {
-    const quantity = quantities[item.id] || 1;
-    if (quantity === 0) return;
-
-    addToCart({
-      id: item.id,
-      name: item.name,
-      image: item.image,
-      weight: "Regular", // Default weight for non-sweet items
-      price: item.price,
-      quantity: quantity,
-    });
-
-    // Reset quantity after adding to cart
-    setQuantities((prev) => ({
-      ...prev,
-      [item.id]: 1,
-    }));
-  };
-
-  const handleRemoveFromCart = (item: any) => {
-    removeFromCart(item.id, "Regular");
+    // Sync with cart
+    const cartItem = cartItems.find(i => i.id === item.id && i.weight === "Regular");
+    if (newQty > 0) {
+      if (cartItem) {
+        updateQuantity(item.id, "Regular", newQty);
+      } else {
+        addToCart({
+          id: item.id,
+          name: item.name,
+          image: item.image,
+          weight: "Regular",
+          price: item.price,
+          quantity: newQty
+        });
+      }
+    } else {
+      if (cartItem) {
+        removeFromCart(item.id, "Regular");
+      }
+    }
   };
 
   return (
@@ -139,13 +152,13 @@ export default function Order() {
                           }`}
                         style={{ width: "35%" }}
                       >
-                        <div className="relative w-full aspect-square max-w-[200px] mx-auto">
+                        <div className="relative w-full aspect-square max-w-[100px] mx-auto">
                           <div className="absolute inset-0 rounded-full overflow-hidden">
                             <Image
                               src={item.image}
                               alt={item.name}
-                              width={200}
-                              height={200}
+                              width={100}
+                              height={100}
                               className="object-cover w-full h-full"
                             />
                           </div>
@@ -154,7 +167,7 @@ export default function Order() {
 
                       {/* Content Section */}
                       <div
-                        className={`flex flex-col ${isImageRight ? "order-1" : "order-2"
+                        className={`flex flex-col border-b border-black pb-2 ${isImageRight ? "order-1" : "order-2"
                           }`}
                         style={{ width: "65%" }}
                       >
@@ -175,7 +188,7 @@ export default function Order() {
                           <div className="flex items-center gap-2">
                             <button
                               onClick={() =>
-                                handleQuantityChange(item.id, -1)
+                                handleQuantityChange(item, -1)
                               }
                               className="w-7 h-7 flex items-center justify-center bg-black text-white hover:bg-gray-800 transition-colors"
                               style={{ borderRadius: "6px 0 6px 0" }}
@@ -183,10 +196,10 @@ export default function Order() {
                               <span className="text-base font-normal">−</span>
                             </button>
                             <span className="w-7 text-center font-medium text-base">
-                              {quantities[item.id] || 1}
+                              {quantities[item.id] || 0}
                             </span>
                             <button
-                              onClick={() => handleQuantityChange(item.id, 1)}
+                              onClick={() => handleQuantityChange(item, 1)}
                               className="w-7 h-7 flex items-center justify-center bg-black text-white hover:bg-gray-800 transition-colors"
                               style={{ borderRadius: "0 6px 0 6px" }}
                             >
@@ -201,36 +214,6 @@ export default function Order() {
                             {item.description}
                           </p>
                         )}
-
-                        {/* Black Line */}
-                        <div className="w-full h-px bg-black mb-3"></div>
-
-                        {/* Add to Cart with Delete Icon */}
-                        <div className="flex items-center justify-between">
-                          <button
-                            onClick={() => handleAddToCart(item)}
-                            className="text-black font-medium hover:text-[var(--color-primary)] transition-colors text-sm"
-                          >
-                            Add to Cart
-                          </button>
-                          <button
-                            onClick={() => handleRemoveFromCart(item)}
-                            className="p-1 hover:bg-gray-100 rounded transition-colors"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="h-4 w-4 text-black"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          </button>
-                        </div>
                       </div>
                     </div>
                   );
@@ -247,7 +230,10 @@ export default function Order() {
         <span className="font-normal text-base">
           {getCartCount()} Item{getCartCount() !== 1 ? "s" : ""} Added
         </span>
-        <button className="font-normal text-base hover:underline transition-all">
+        <button
+          onClick={() => router.push('/cart')}
+          className="font-normal text-base hover:underline transition-all cursor-pointer"
+        >
           View Cart &gt;
         </button>
       </div>

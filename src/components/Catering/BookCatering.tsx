@@ -42,7 +42,7 @@ export default function BookCatering() {
 
   return (
     <section
-      className="relative min-h-screen py-16 px-6 flex items-center justify-center"
+      className="relative min-h-screen py-16 px-6 flex items-center justify-center [--book-left:0%] md:[--book-left:-20%]"
       style={{
         backgroundImage: 'url(/images/catering/catringlastrow/book-the-catering.png)',
         backgroundSize: 'cover',
@@ -60,7 +60,7 @@ export default function BookCatering() {
                 fontSize: '55px',
                 lineHeight: '1',
                 top: '22px',
-                left: '-20%',
+                left: 'var(--book-left)',
                 whiteSpace: 'nowrap',
                 transform: 'rotate(-15deg)'
               }}

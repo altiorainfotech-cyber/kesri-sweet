@@ -90,7 +90,7 @@ export default function Hero() {
             className="mt-3 md:mt-4 lg:mt-6 text-gray-600 max-w-md font-[family-name:var(--font-inter)] text-sm md:text-base"
             style={{ fontWeight: 400 }}
           >
-            Kesari – Best Indian Restaurant in Surrey for Authentic Sweets & Eats
+            Kesari brings you the finest Indian confectionery and authentic flavours, proudly serving guests looking for best Indian restaurant in White Rock, Surrey BC. Widely known for offering some of the best Indian food in South Surrey, we blend traditional recipes with premium ingredients to create a truly memorable dining experience.
           </p>
 
           {/* Button */}
