@@ -60,7 +60,7 @@ export default function MenuHero() {
       <div className="flex flex-col lg:grid lg:grid-cols-2 min-h-screen">
 
         {/* Mobile: Big rotated image space */}
-        <div className="lg:hidden relative bg-white min-h-[350px] order-1"></div>
+        <div className="lg:hidden relative bg-white min-h-[254px] order-1"></div>
 
         {/* LEFT : White section with background image */}
         <div className="relative bg-white flex items-center justify-center p-2 lg:p-16 order-2 lg:order-1 min-h-[40px] lg:min-h-screen">
@@ -97,7 +97,7 @@ export default function MenuHero() {
         </div>
 
         {/* RIGHT : Orange section with content */}
-        <div className="relative bg-[#FF9900]/[0.51] flex items-center justify-center p-8 lg:p-16 order-4 lg:order-3 min-h-[400px] lg:min-h-screen">
+        <div className="relative bg-[#FF9900]/[0.51] flex items-center justify-center p-8 lg:p-16 order-4 lg:order-3 min-h-[auto] lg:min-h-screen">
           <div className="w-full max-w-[600px]">
 
             {/* Title, description and button */}
@@ -112,7 +112,6 @@ export default function MenuHero() {
                 Explore Menu
               </button>
             </div>
-
           </div>
         </div>
 

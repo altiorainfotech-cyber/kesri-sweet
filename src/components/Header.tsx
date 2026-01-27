@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { useCart } from "@/context/CartContext";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -12,8 +13,9 @@ const navLinks = [
 ];
 
 export default function Header() {
-  const [cartCount] = useState(0);
+  const { getCartCount } = useCart();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const cartCount = getCartCount();
 
   return (
     <header className="absolute top-0 left-0 right-0 z-50 py-4">
@@ -122,7 +124,27 @@ export default function Header() {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 w-screen bg-white shadow-2xl z-50 animate-growLeftToRight overflow-hidden">
-          <nav className="flex flex-col p-6 max-w-full">
+          {/* Close Button */}
+          <button
+            className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="w-6 h-6 text-gray-700"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+          <nav className="flex flex-col p-6 pt-12 max-w-full">
             {navLinks.map((link, index) => (
               <Link
                 key={link.name}

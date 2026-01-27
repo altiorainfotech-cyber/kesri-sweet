@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { useCart } from "@/context/CartContext";
 
 interface SweetVariant {
     weight: string;
@@ -53,6 +54,8 @@ const sweetsData: Sweet[] = [
 ];
 
 export default function SweetsList() {
+    const { addToCart, removeFromCart } = useCart();
+
     // State for selected variants, initialized with the first variant for each sweet
     const [selectedVariants, setSelectedVariants] = useState<{ [key: number]: SweetVariant }>(
         sweetsData.reduce((acc, sweet) => ({ ...acc, [sweet.id]: sweet.variants[0] }), {})
@@ -65,6 +68,9 @@ export default function SweetsList() {
         3: 1,
     });
 
+    // State for showing "Added to cart" feedback
+    const [addedItems, setAddedItems] = useState<{ [key: number]: boolean }>({});
+
     const handleVariantChange = (id: number, variant: SweetVariant) => {
         setSelectedVariants(prev => ({
             ...prev,
@@ -75,8 +81,40 @@ export default function SweetsList() {
     const handleQuantityChange = (id: number, delta: number) => {
         setQuantities(prev => ({
             ...prev,
-            [id]: Math.max(1, (prev[id] || 1) + delta)
+            [id]: Math.max(0, (prev[id] || 0) + delta)
         }));
+    };
+
+    const handleAddToCart = (sweet: Sweet) => {
+        const selectedVariant = selectedVariants[sweet.id];
+        const quantity = quantities[sweet.id] || 0;
+
+        if (quantity === 0) return;
+
+        addToCart({
+            id: sweet.id,
+            name: sweet.name,
+            image: sweet.image,
+            weight: selectedVariant.weight,
+            price: selectedVariant.price,
+            quantity: quantity,
+        });
+
+        // Show feedback
+        setAddedItems(prev => ({ ...prev, [sweet.id]: true }));
+
+        // Reset feedback after 2 seconds
+        setTimeout(() => {
+            setAddedItems(prev => ({ ...prev, [sweet.id]: false }));
+        }, 2000);
+
+        // Reset quantity to 1 after adding
+        setQuantities(prev => ({ ...prev, [sweet.id]: 1 }));
+    };
+
+    const handleRemoveFromCart = (sweet: Sweet) => {
+        const selectedVariant = selectedVariants[sweet.id];
+        removeFromCart(sweet.id, selectedVariant.weight);
     };
 
     return (
@@ -175,7 +213,10 @@ export default function SweetsList() {
                                                     <span className="mb-0.5">+</span>
                                                 </button>
 
-                                                <button className="text-black ml-2 hover:text-red-600 transition-colors">
+                                                <button
+                                                    onClick={() => handleRemoveFromCart(sweet)}
+                                                    className="text-black ml-2 hover:text-red-600 transition-colors"
+                                                >
                                                     {/* Trash Icon */}
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                                         <polyline points="3 6 5 6 21 6"></polyline>
@@ -185,8 +226,11 @@ export default function SweetsList() {
                                             </div>
                                         </div>
 
-                                        <button className="bg-orange-400 hover:bg-orange-500 text-black px-6 py-2.5 rounded-tl-2xl rounded-br-2xl text-sm font-medium shadow-md transition-colors w-full md:w-auto">
-                                            Add to Cart
+                                        <button
+                                            onClick={() => handleAddToCart(sweet)}
+                                            className={`${addedItems[sweet.id] ? 'bg-green-500' : 'bg-orange-400 hover:bg-orange-500'} text-black px-6 py-2.5 rounded-tl-2xl rounded-br-2xl text-sm font-medium shadow-md transition-colors w-full md:w-auto`}
+                                        >
+                                            {addedItems[sweet.id] ? 'Added!' : 'Add to Cart'}
                                         </button>
                                     </div>
                                 </div>
