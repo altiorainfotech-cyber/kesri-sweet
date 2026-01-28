@@ -39,11 +39,12 @@ export default function About() {
           {/* Left Side - Food Image */}
           <div className="w-full lg:w-1/2 px-4 md:px-0">
             <Image
-              src="/images/home-about/aboutleftside.png"
+              src="/images/home-about/about.jpg"
               alt="Delicious Indian Food"
               width={600}
               height={500}
               className="object-contain w-full h-auto"
+              style={{ borderTopLeftRadius: '20px', borderBottomRightRadius: '20px' }}
             />
           </div>
 

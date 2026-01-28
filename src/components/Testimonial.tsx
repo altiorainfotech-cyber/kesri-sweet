@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -8,21 +7,21 @@ const testimonials = [
   {
     id: 1,
     name: "Lawrence Salaver",
-    image: "/images/home-testimonial/Mask group.png",
+    position: "Local Guide",
     rating: 5,
-    text: "First time trying out this restaurant in White Rock & I'm impressed on their place. Got a nice ambiance once you enter. Their staff are very friendly. We ordered Samosas, veggie & chicken, & they were good. Will have the butter chicken for dinner tonight & some sweets, (forgot what it's called lol!)",
+    text: "First time trying out this restaurant in White Rock & I'm impressed on their place. Got a nice ambiance once you enter. Their staff are very friendly. We ordered Samosas, veggie & chicken, & they were good.",
   },
   {
     id: 2,
     name: "Sarah Johnson",
-    image: "/images/home-testimonial/Mask group.png",
+    position: "Food Blogger",
     rating: 5,
     text: "Amazing food and wonderful service! The sweets are absolutely delicious. I've been coming here for months and they never disappoint. Highly recommend the Kaju Katli and Gulab Jamun!",
   },
   {
     id: 3,
     name: "Michael Chen",
-    image: "/images/home-testimonial/Mask group.png",
+    position: "Regular Customer",
     rating: 5,
     text: "Best Indian sweets in town! The quality is outstanding and you can taste the freshness in every bite. The staff is always helpful and the atmosphere is warm and welcoming.",
   },
@@ -39,142 +38,106 @@ export default function Testimonial() {
     setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
-  // Auto-play functionality
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextTestimonial();
-    }, 5000);
-
+    const interval = setInterval(nextTestimonial, 5000);
     return () => clearInterval(interval);
   }, []);
 
   const current = testimonials[currentIndex];
 
   return (
-    <section className="overflow-hidden">
-      <div className="flex flex-col lg:flex-row">
-        {/* Left Side - Text Content - White Background */}
-        <motion.div
-          className="w-full lg:w-[45%] px-4 md:px-6 lg:pl-20 lg:pr-10 bg-white pt-8 md:pt-10 lg:pt-12 pb-8 lg:pb-0"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
-          {/* Orange Square Decoration */}
-          <div
-            className="bg-[var(--color-primary)] mb-4 md:mb-6 lg:mb-8 w-[30px] h-[25px] md:w-[35px] md:h-[28px] lg:w-[40px] lg:h-[30px]"
-            style={{
-              borderTopLeftRadius: '10px',
-              borderBottomRightRadius: '10px',
-            }}
-          />
+    <section className="relative h-auto lg:h-[350px] flex items-center justify-center overflow-hidden">
+      {/* Background with parallax effect and overlay */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: 'url(/images/Why-Choose/RDK-00683.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
+        }}
+      >
+        <div className="absolute inset-0 bg-[#000000CC] backdrop-blur-[2px]" />
+      </div>
 
-          {/* Title */}
-          <div className="relative mb-6 md:mb-7 lg:mb-8">
-            <span
-              className="font-[family-name:var(--font-island-moments)] text-[var(--color-primary)] text-3xl md:text-4xl lg:text-5xl block mb-[-20px] md:mb-[-28px] lg:mb-[-35px] pl-16 md:pl-20 lg:pl-24"
-            >
-              Customer
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-4 md:px-8 py-10 lg:py-0">
+        <div className="flex flex-col items-center">
+          {/* Header Link/Text */}
+          <div className="mb-4 lg:mb-6 flex flex-col items-center">
+            <span className="font-[family-name:var(--font-island-moments)] text-[#FF9900] text-3xl md:text-4xl lg:text-5xl -mb-3 md:-mb-4">
+              Happy Guests
             </span>
-            <h2
-              className="text-[#2d3a4a] text-2xl md:text-3xl lg:text-4xl"
-              style={{ fontWeight: 400, fontFamily: 'Inter, sans-serif' }}
-            >
-              Reviews
-            </h2>
           </div>
 
-          {/* Testimonial Text - White background */}
-          <div className="bg-white p-3 md:p-4 lg:mr-[-117px] z-[9999] relative min-h-[120px] md:min-h-[140px] lg:min-h-[150px] mt-0 lg:-mt-5">
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={currentIndex}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-                className="leading-relaxed text-sm md:text-base"
-                style={{ color: '#444', lineHeight: '1.8' }}
-              >
-                {current.text}
-              </motion.p>
-            </AnimatePresence>
-          </div>
-        </motion.div>
+          <div className="relative w-full text-center">
+            {/* Quote Icons */}
+            <span className="absolute -top-6 left-0 text-[#FF9900] text-4xl lg:text-6xl opacity-20 hidden md:block">"</span>
 
-        {/* Right Side - Image and Orange Section */}
-        <motion.div
-          className="w-full lg:w-[55%] bg-[var(--color-primary)] pt-12 md:pt-16 lg:pt-20 pb-16 md:pb-20 lg:pb-0 min-h-[400px] md:min-h-[500px] lg:min-h-[63vh]"
-          initial={{ scaleX: 0, transformOrigin: "left" }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
-          {/* Content Container */}
-          <div className="h-full flex items-center justify-center flex-col lg:flex-row px-4 md:px-6 lg:px-0">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
-                initial={{ opacity: 0, scaleX: 0, transformOrigin: "left" }}
-                animate={{ opacity: 1, scaleX: 1 }}
-                exit={{ opacity: 0, scaleX: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="flex flex-col lg:flex-row items-center justify-center w-full"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.05 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="flex flex-col items-center"
               >
-                {/* Testimonial Image */}
-                <div className="relative z-[9999] mb-8 lg:mb-0 lg:ml-[74px]">
-                  <Image
-                    src={current.image}
-                    alt={current.name}
-                    width={200}
-                    height={200}
-                    className="w-[160px] h-[200px] md:w-[180px] md:h-[225px] lg:w-[213px] lg:h-[269px] object-cover"
-                  />
-
-                  {/* Navigation Arrows - Bottom of image */}
-                  <div className="flex gap-3 md:gap-4 justify-center absolute bottom-[-30px] md:bottom-[-35px] lg:bottom-[-40px] left-1/2 -translate-x-1/2">
-                    <button
-                      onClick={prevTestimonial}
-                      className="text-white hover:opacity-70 transition-opacity text-xl md:text-2xl"
+                {/* Rating */}
+                <div className="flex gap-1 mb-4 lg:mb-6">
+                  {[...Array(5)].map((_, i) => (
+                    <span
+                      key={i}
+                      className={`text-xl lg:text-2xl ${i < current.rating ? "text-[#FF9900]" : "text-gray-600"}`}
                     >
-                      ‹
-                    </button>
-                    <button
-                      onClick={nextTestimonial}
-                      className="text-white hover:opacity-70 transition-opacity text-xl md:text-2xl"
-                    >
-                      ›
-                    </button>
-                  </div>
+                      ★
+                    </span>
+                  ))}
                 </div>
 
-                {/* Name and Rating - No background */}
-                <div className="text-center lg:text-left lg:mr-auto lg:ml-[50px] mt-8 lg:mt-0">
-                  <h3
-                    className="font-bold mb-1 text-lg md:text-xl lg:text-2xl"
-                    style={{ color: '#000' }}
-                  >
-                    {current.name}
-                  </h3>
-                  <p
-                    className="mb-3 text-xs md:text-sm"
-                    style={{ color: '#000' }}
-                  >
-                    {current.name}
-                  </p>
-                  {/* Star Rating - White color */}
-                  <div className="flex gap-1 mb-4 lg:mb-8 justify-center lg:justify-start">
-                    {[...Array(current.rating)].map((_, i) => (
-                      <span key={i} className="text-white text-sm md:text-base">★</span>
-                    ))}
+                {/* Content */}
+                <p className="text-white text-base md:text-lg lg:text-2xl font-light italic leading-relaxed max-w-3xl mb-6 lg:mb-8 line-clamp-3 lg:line-clamp-none">
+                  {current.text}
+                </p>
+
+                {/* Profile Info */}
+                <div className="flex items-center gap-4">
+                  <div className="h-0.5 w-6 bg-[#FF9900]/50" />
+                  <div className="text-center">
+                    <h4 className="text-white font-bold text-lg md:text-xl tracking-wide uppercase">
+                      {current.name}
+                    </h4>
+                    <span className="text-[#FF9900] text-sm font-medium tracking-[0.2em] uppercase">
+                      {current.position}
+                    </span>
                   </div>
+                  <div className="h-0.5 w-6 bg-[#FF9900]/50" />
                 </div>
               </motion.div>
             </AnimatePresence>
 
+            <span className="absolute -bottom-6 right-0 text-[#FF9900] text-4xl lg:text-6xl opacity-20 hidden md:block">"</span>
           </div>
-        </motion.div>
+        </div>
+
+        {/* Minimal Navigation */}
+        <div className="absolute top-1/2 -translate-y-1/2 left-4 md:left-8 right-4 md:right-8 flex justify-between pointer-events-none">
+          <button
+            onClick={prevTestimonial}
+            className="pointer-events-auto h-10 w-10 flex items-center justify-center rounded-full border border-white/20 text-white hover:bg-[#FF9900] hover:border-[#FF9900] transition-all duration-300 backdrop-blur-sm"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            onClick={nextTestimonial}
+            className="pointer-events-auto h-10 w-10 flex items-center justify-center rounded-full border border-white/20 text-white hover:bg-[#FF9900] hover:border-[#FF9900] transition-all duration-300 backdrop-blur-sm"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
   );
