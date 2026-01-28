@@ -14,9 +14,11 @@ export default function CateringPage() {
         <>
             <HeaderOther />
             <CateringService />
+            <Wedding/>
+          
             <WeddingTwo />
             <WhyChoose />
-            <CateringMenu />
+            
             <BookCatering />
             <Footer />
         </>

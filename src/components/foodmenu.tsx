@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import menuData from '@/data/menuData.json';
 
 interface MenuItem {
@@ -108,9 +109,11 @@ export default function MenuHero() {
               <p className="text-gray-900 mb-6 lg:mb-8 leading-relaxed text-sm lg:text-base">
                 {activeItem.description}
               </p>
-              <button className="px-6 py-3 bg-[#FF8400] text-white font-semibold hover:bg-[#FF9900] transition-colors shadow-[0_4px_6px_rgba(0,0,0,0.3)]" style={{ borderRadius: '12px 0 12px 0' }}>
-                Explore Menu
-              </button>
+              <Link href="/order">
+                <button className="px-6 py-3 bg-[#FF8400] text-white font-semibold hover:bg-[#FF9900] transition-colors shadow-[0_4px_6px_rgba(0,0,0,0.3)]" style={{ borderRadius: '12px 0 12px 0' }}>
+                  Explore Menu
+                </button>
+              </Link>
             </div>
           </div>
         </div>

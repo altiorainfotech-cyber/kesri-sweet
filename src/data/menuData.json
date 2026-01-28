@@ -4,31 +4,31 @@
       "id": 1,
       "title": "Main Course - Vegetarian",
       "description": "A wholesome vegetarian main course crafted with fresh ingredients and rich flavors.",
-      "image": "/images/home-dish/Briyani.png"
+      "image": "/images/menu/Main Course - Vegetarian.jpg"
     },
     {
       "id": 2,
       "title": "Main Course - Non Vegetarian",
       "description": "A hearty non-vegetarian main course packed with bold flavors and satisfying richness.",
-      "image": "/images/home-dish/pav-bhaji-1.png"
+      "image": "/images/menu/Main Course - Non Vegetarian.webp"
     },
     {
       "id": 3,
       "title": "Dessert",
       "description": "A sweet ending that melts in your mouth and completes the meal perfectly.",
-      "image": "/images/home-dish/Best Laccha Paratha 1.png"
+      "image": "/images/menu/Dessert.jpg"
     },
     {
       "id": 4,
       "title": "Appetizers - Veg",
       "description": "Delicious vegetarian appetizers to awaken your taste buds and start the meal right.",
-      "image": "/images/home-dish/pain-puri.png"
+      "image": "/images/menu/APPETIZER-veg.jpg"
     },
     {
       "id": 5,
       "title": "Appetizers - Non Veg",
       "description": "Flavor-packed non-veg appetizers that set the tone for a satisfying feast.",
-      "image": "/images/home-dish/pav-bhaji-1.png"
+      "image": "/images/menu/Appetizers -Non Veg.png"
     }
   ]
 }

@@ -44,7 +44,7 @@ export default function Dishes() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-8 md:py-12 lg:py-16 min-h-[600px] md:min-h-[700px] lg:h-[87vh]"
+      className="relative py-12 md:py-16 min-h-[500px] md:min-h-[550px] lg:min-h-[600px]"
       style={{
         backgroundImage: 'url(/images/home-dish/background.png)',
         backgroundSize: 'cover',
@@ -122,7 +122,7 @@ export default function Dishes() {
         </div>
 
         {/* Menu Link */}
-       
+
       </div>
     </section>
   );

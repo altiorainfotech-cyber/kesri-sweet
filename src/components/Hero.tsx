@@ -28,7 +28,7 @@ export default function Hero() {
           {/* Left Image - Manchurian Small */}
           <div className="relative">
             <Image
-              src="/images/home-page/manchurian-small.png"
+              src="/images/home-page/RDK-00448-removebg-preview.png"
               alt="Manchurian Small"
               width={170}
               height={140}
@@ -141,11 +141,12 @@ export default function Hero() {
         <div className="absolute top-[25%] xl:top-[27%] 2xl:top-[30%] left-[10%] xl:left-[14%] 2xl:left-[19%] z-20">
           <div className="relative">
             <Image
-              src="/images/home-page/manchurian-small.png"
+              src="/images/home-page/RDK-00448.jpg"
               alt="Manchurian Small"
               width={170}
               height={140}
               className="relative z-20 object-contain animate-slideInRight w-[110px] xl:w-[140px] 2xl:w-[170px] h-auto"
+              style={{ borderTopLeftRadius: '30px', borderBottomRightRadius: '30px' }}
             />
           </div>
         </div>
@@ -202,11 +203,12 @@ export default function Hero() {
               className="absolute -top-0 -left-0 z-10 w-[180px] xl:w-[230px] 2xl:w-[280px] h-auto"
             />
             <Image
-              src="/images/home-page/manchurian-big.png"
+              src="/images/home-page/RDK-00437.jpg"
               alt="Manchurian"
-              width={280}
+              width={250}
               height={160}
-              className="relative z-20 object-contain animate-slideInRight w-[180px] xl:w-[230px] 2xl:w-[280px] h-auto"
+              className="relative z-20 object-contain animate-slideInRight w-[180px] xl:w-[230px] 2xl:w-[240px] h-auto"
+              style={{ borderTopLeftRadius: '25px', borderBottomRightRadius: '25px' }}
             />
           </div>
         </div>
