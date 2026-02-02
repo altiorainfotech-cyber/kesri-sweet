@@ -21,7 +21,6 @@ export default function HeaderOther() {
   const { getCartCount } = useCart();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
-  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<string | null>(null);
   const cartCount = getCartCount();
 
   return (
@@ -188,54 +187,37 @@ export default function HeaderOther() {
             </svg>
           </button>
           <nav className="flex flex-col p-6 pt-12 max-w-full">
-            {navLinks.map((link, index) => (
-              <div key={link.name}>
-                {link.submenu ? (
-                  <button
-                    className="group relative text-gray-700 hover:text-[var(--color-primary)] transition-all duration-300 font-medium py-4 px-4 rounded-lg hover:bg-orange-50 flex items-center justify-between w-full text-left"
-                    onClick={() => setMobileSubmenuOpen(mobileSubmenuOpen === link.name ? null : link.name)}
-                    style={{ animationDelay: `${index * 50}ms` }}
-                  >
-                    <span className="relative z-10 flex items-center gap-2">
-                      {link.name}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className={`h-4 w-4 transition-transform duration-300 ${mobileSubmenuOpen === link.name ? 'rotate-180' : ''}`}
-                        viewBox="0 0 20 20"
-                        fill="#FF9900"
-                      >
-                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                      </svg>
-                    </span>
-                    <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-[var(--color-primary)] group-hover:h-8 transition-all duration-300 rounded-r"></div>
-                  </button>
-                ) : (
-                  <Link
-                    href={link.href}
-                    className="group relative text-gray-700 hover:text-[var(--color-primary)] transition-all duration-300 font-medium py-4 px-4 rounded-lg hover:bg-orange-50 flex items-center justify-between"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    style={{ animationDelay: `${index * 50}ms` }}
-                  >
-                    <span className="relative z-10">{link.name}</span>
-                    <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-[var(--color-primary)] group-hover:h-8 transition-all duration-300 rounded-r"></div>
-                  </Link>
-                )}
-                {link.submenu && mobileSubmenuOpen === link.name && (
-                  <div className="pl-8">
-                    {link.submenu.map((sublink) => (
-                      <Link
-                        key={sublink.name}
-                        href={sublink.href}
-                        className="block text-gray-600 hover:text-[var(--color-primary)] transition-colors py-2 px-4"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        {sublink.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+            {navLinks.flatMap((link, index) => {
+              const items = [
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="group relative text-gray-700 hover:text-[var(--color-primary)] transition-all duration-300 font-medium py-4 px-4 rounded-lg hover:bg-orange-50 flex items-center justify-between"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <span className="relative z-10">{link.name}</span>
+                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-[var(--color-primary)] group-hover:h-8 transition-all duration-300 rounded-r"></div>
+                </Link>
+              ];
+              if (link.submenu) {
+                link.submenu.forEach((sublink, subIndex) => {
+                  items.push(
+                    <Link
+                      key={sublink.name}
+                      href={sublink.href}
+                      className="group relative text-gray-700 hover:text-[var(--color-primary)] transition-all duration-300 font-medium py-4 px-4 rounded-lg hover:bg-orange-50 flex items-center justify-between"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      style={{ animationDelay: `${(index + subIndex + 1) * 50}ms` }}
+                    >
+                      <span className="relative z-10">{sublink.name}</span>
+                      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-[var(--color-primary)] group-hover:h-8 transition-all duration-300 rounded-r"></div>
+                    </Link>
+                  );
+                });
+              }
+              return items;
+            })}
 
             {/* Decorative element */}
             <div className="mt-4 pt-4 border-t border-gray-200">
