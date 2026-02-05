@@ -79,7 +79,7 @@ export default function Order() {
     >
       {/* Category Navigation - Full Width */}
       <div className="mb-8 bg-white/95 backdrop-blur-sm py-3 px-6 flex flex-wrap gap-6 items-center justify-center w-full">
-        {menuCategories.map((category) => (
+        {menuCategories.filter((category) => category !== "Sweets").map((category) => (
           <button
             key={category}
             onClick={() => setActiveCategory(category)}
