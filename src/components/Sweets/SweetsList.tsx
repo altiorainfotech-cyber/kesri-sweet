@@ -21,35 +21,475 @@ interface Sweet {
 const sweetsData: Sweet[] = [
     {
         id: 1,
-        name: "Coconut Sweet",
-        image: "/images/sweets/coconut.png",
-        description: "Tradition wrapped in tropical flavour, crafted to melt gently on your palate.",
+        name: "Bikaneri Barfi",
+        image: "/images/ordar-page/Sweets/Bikareri Barfi.webp",
+        description: "Traditional Bikaneri style barfi made with khoya and sugar.",
         variants: [
-            { weight: "250g", price: 8.00 },
-            { weight: "500g", price: 15.00 },
-            { weight: "1kg", price: 28.00 },
+            { weight: "1/4 lb", price: 3.25 },
+            { weight: "1/2 lb", price: 6.50 },
+            { weight: "1 lb", price: 13.00 },
         ]
     },
     {
         id: 2,
-        name: "Phool Patisa",
-        image: "/images/sweets/Phool-Patisa.png",
-        description: "Tradition wrapped in tropical flavour, crafted to melt gently on your palate.",
+        name: "Gur Khoya Barfi",
+        image: "/images/ordar-page/Sweets/Gur Khoya Barfi.jpg",
+        description: "Rich barfi made with jaggery and khoya for a wholesome taste.",
         variants: [
-            { weight: "250g", price: 8.00 },
-            { weight: "500g", price: 15.00 },
-            { weight: "1kg", price: 28.00 },
+            { weight: "1/4 lb", price: 3.75 },
+            { weight: "1/2 lb", price: 7.50 },
+            { weight: "1 lb", price: 15.00 },
         ]
     },
     {
         id: 3,
-        name: "Malai Chop",
-        image: "/images/sweets/Malai-Chop.png",
-        description: "Tradition wrapped in tropical flavour, crafted to melt gently on your palate.",
+        name: "Plain Khoya Barfi",
+        image: "/images/ordar-page/Sweets/Khoya_Burfi.webp",
+        description: "Classic khoya barfi with a smooth, melt-in-mouth texture.",
         variants: [
-            { weight: "250g", price: 8.00 },
-            { weight: "500g", price: 15.00 },
-            { weight: "1kg", price: 28.00 },
+            { weight: "1/4 lb", price: 3.00 },
+            { weight: "1/2 lb", price: 6.00 },
+            { weight: "1 lb", price: 12.00 },
+        ]
+    },
+    {
+        id: 4,
+        name: "Khoya Pista Barfi",
+        image: "/images/ordar-page/Sweets/khoya Pista Barfi.webp",
+        description: "Khoya barfi enriched with premium pistachios.",
+        variants: [
+            { weight: "1/4 lb", price: 3.25 },
+            { weight: "1/2 lb", price: 6.50 },
+            { weight: "1 lb", price: 13.00 },
+        ]
+    },
+    {
+        id: 5,
+        name: "Almond Khoya",
+        image: "/images/ordar-page/Sweets/khoya_badam_burfi_3072x2048_56b0b293-1b36-4e53-9045-cc2ff19d4190.webp",
+        description: "Khoya barfi topped with crunchy almonds.",
+        variants: [
+            { weight: "1/4 lb", price: 3.25 },
+            { weight: "1/2 lb", price: 6.50 },
+            { weight: "1 lb", price: 13.00 },
+        ]
+    },
+    {
+        id: 6,
+        name: "Gajar Pak",
+        image: "/images/ordar-page/Sweets/Gajar-Pak.jpg",
+        description: "Traditional carrot-based sweet delicacy.",
+        variants: [
+            { weight: "1/4 lb", price: 3.25 },
+            { weight: "1/2 lb", price: 6.50 },
+            { weight: "1 lb", price: 13.00 },
+        ]
+    },
+    {
+        id: 7,
+        name: "Khoya Gajar",
+        image: "/images/ordar-page/Sweets/Khoya Gajar.jpg",
+        description: "Carrot and khoya combined for a rich, flavorful treat.",
+        variants: [
+            { weight: "1/4 lb", price: 3.25 },
+            { weight: "1/2 lb", price: 6.50 },
+            { weight: "1 lb", price: 13.00 },
+        ]
+    },
+    {
+        id: 8,
+        name: "Mango Barfi",
+        image: "/images/ordar-page/Sweets/Mango-Burfi.webp",
+        description: "Delicious barfi infused with real mango flavor.",
+        variants: [
+            { weight: "1/4 lb", price: 3.25 },
+            { weight: "1/2 lb", price: 6.50 },
+            { weight: "1 lb", price: 13.00 },
+        ]
+    },
+    {
+        id: 9,
+        name: "Dhodha Barfi",
+        image: "/images/ordar-page/Sweets/dodha-barfi.jpg",
+        description: "Punjabi specialty made with milk and sugar, slow cooked to perfection.",
+        variants: [
+            { weight: "1/4 lb", price: 3.25 },
+            { weight: "1/2 lb", price: 6.50 },
+            { weight: "1 lb", price: 13.00 },
+        ]
+    },
+    {
+        id: 10,
+        name: "Fruit Barfi",
+        image: "/images/ordar-page/Sweets/Fruit barfi.jpg",
+        description: "Colorful barfi with mixed dried fruits and nuts.",
+        variants: [
+            { weight: "1/4 lb", price: 3.25 },
+            { weight: "1/2 lb", price: 6.50 },
+            { weight: "1 lb", price: 13.00 },
+        ]
+    },
+    {
+        id: 11,
+        name: "Kaju Katli",
+        image: "/images/ordar-page/Sweets/Kaju katli.avif",
+        description: "Premium cashew fudge with silver leaf topping.",
+        variants: [
+            { weight: "1/4 lb", price: 3.25 },
+            { weight: "1/2 lb", price: 6.50 },
+            { weight: "1 lb", price: 13.00 },
+        ]
+    },
+    {
+        id: 12,
+        name: "Mathura Peda",
+        image: "/images/ordar-page/Sweets/mathura-peda.jpg",
+        description: "Famous Mathura style peda with cardamom flavor.",
+        variants: [
+            { weight: "1/4 lb", price: 3.25 },
+            { weight: "1/2 lb", price: 6.50 },
+            { weight: "1 lb", price: 13.00 },
+        ]
+    },
+    {
+        id: 13,
+        name: "Kesar Peda",
+        image: "/images/ordar-page/Sweets/Kesar peda.webp",
+        description: "Saffron-infused peda with rich aroma and taste.",
+        variants: [
+            { weight: "1/4 lb", price: 3.25 },
+            { weight: "1/2 lb", price: 6.50 },
+            { weight: "1 lb", price: 13.00 },
+        ]
+    },
+    {
+        id: 14,
+        name: "Kalakand",
+        image: "/images/ordar-page/Sweets/Kalakand.png",
+        description: "Soft milk cake with a grainy texture and cardamom essence.",
+        variants: [
+            { weight: "1/4 lb", price: 3.25 },
+            { weight: "1/2 lb", price: 6.50 },
+            { weight: "1 lb", price: 13.00 },
+        ]
+    },
+    {
+        id: 15,
+        name: "Pink Coconut Barfi",
+        image: "/images/ordar-page/Sweets/Pink coconut barfi.jpg",
+        description: "Sweet coconut barfi with a beautiful pink hue.",
+        variants: [
+            { weight: "1/4 lb", price: 3.25 },
+            { weight: "1/2 lb", price: 6.50 },
+            { weight: "1 lb", price: 13.00 },
+        ]
+    },
+    {
+        id: 16,
+        name: "Besan Barfi",
+        image: "/images/ordar-page/Sweets/Besan barfi.jpg",
+        description: "Traditional gram flour barfi with ghee and sugar.",
+        variants: [
+            { weight: "1/4 lb", price: 2.25 },
+            { weight: "1/2 lb", price: 4.50 },
+            { weight: "1 lb", price: 9.00 },
+        ]
+    },
+    {
+        id: 17,
+        name: "Coconut Ladoo",
+        image: "/images/ordar-page/Sweets/Coconut ladoo.webp",
+        description: "Sweet coconut balls made with condensed milk.",
+        variants: [
+            { weight: "1/4 lb", price: 3.75 },
+            { weight: "1/2 lb", price: 7.50 },
+            { weight: "1 lb", price: 15.00 },
+        ]
+    },
+    {
+        id: 18,
+        name: "Kesar Ladoo",
+        image: "/images/ordar-page/Sweets/Kesar ladoo.webp",
+        description: "Saffron-flavored ladoo with a rich golden color.",
+        variants: [
+            { weight: "1/4 lb", price: 2.25 },
+            { weight: "1/2 lb", price: 4.50 },
+            { weight: "1 lb", price: 9.00 },
+        ]
+    },
+    {
+        id: 19,
+        name: "Navratan Ladoo",
+        image: "/images/ordar-page/Sweets/Navratan ladoo.webp",
+        description: "Nine-jeweled ladoo with assorted dry fruits and nuts.",
+        variants: [
+            { weight: "1/4 lb", price: 2.25 },
+            { weight: "1/2 lb", price: 4.50 },
+            { weight: "1 lb", price: 9.00 },
+        ]
+    },
+    {
+        id: 20,
+        name: "Besan Ladoo",
+        image: "/images/ordar-page/Sweets/Besan ladoo.webp",
+        description: "Classic gram flour ladoo with ghee and cardamom.",
+        variants: [
+            { weight: "1/4 lb", price: 3.00 },
+            { weight: "1/2 lb", price: 6.00 },
+            { weight: "1 lb", price: 12.00 },
+        ]
+    },
+    {
+        id: 21,
+        name: "Atta Pinni",
+        image: "/images/ordar-page/Sweets/Atta pinni.webp",
+        description: "Whole wheat flour sweet with dry fruits and ghee.",
+        variants: [
+            { weight: "1/4 lb", price: 3.75 },
+            { weight: "1/2 lb", price: 7.50 },
+            { weight: "1 lb", price: 15.00 },
+        ]
+    },
+    {
+        id: 22,
+        name: "Alsi Pinni",
+        image: "/images/ordar-page/Sweets/Alsi pinni.png",
+        description: "Nutritious flaxseed pinni with traditional spices.",
+        variants: [
+            { weight: "1/4 lb", price: 3.75 },
+            { weight: "1/2 lb", price: 7.50 },
+            { weight: "1 lb", price: 15.00 },
+        ]
+    },
+    {
+        id: 23,
+        name: "Patisa",
+        image: "/images/ordar-page/Sweets/Patisa.webp",
+        description: "Flaky, melt-in-mouth sweet made with gram flour.",
+        variants: [
+            { weight: "1/4 lb", price: 3.00 },
+            { weight: "1/2 lb", price: 6.00 },
+            { weight: "1 lb", price: 12.00 },
+        ]
+    },
+    {
+        id: 24,
+        name: "Chana Dal Barfi",
+        image: "/images/ordar-page/Sweets/Chana dal barfi.jpg",
+        description: "Rich barfi made with split chickpeas and ghee.",
+        variants: [
+            { weight: "1/4 lb", price: 3.25 },
+            { weight: "1/2 lb", price: 6.50 },
+            { weight: "1 lb", price: 13.00 },
+        ]
+    },
+    {
+        id: 25,
+        name: "Gulab Jamun Filled",
+        image: "/images/ordar-page/Sweets/Gulab jamun.jpg",
+        description: "Gulab jamun with delicious filling inside.",
+        variants: [
+            { weight: "1/4 lb", price: 3.00 },
+            { weight: "1/2 lb", price: 6.00 },
+            { weight: "1 lb", price: 12.00 },
+        ]
+    },
+    {
+        id: 26,
+        name: "Pink Chum Chum",
+        image: "/images/ordar-page/Sweets/Pink-Chum-Chum.jpg",
+        description: "Soft Bengali sweet in beautiful pink color.",
+        variants: [
+            { weight: "1/4 lb", price: 3.00 },
+            { weight: "1/2 lb", price: 6.00 },
+            { weight: "1 lb", price: 12.00 },
+        ]
+    },
+    {
+        id: 27,
+        name: "White Chum Chum",
+        image: "/images/ordar-page/Sweets/White chum chum.jpg",
+        description: "Classic white Bengali sweet with coconut coating.",
+        variants: [
+            { weight: "1/4 lb", price: 3.00 },
+            { weight: "1/2 lb", price: 6.00 },
+            { weight: "1 lb", price: 12.00 },
+        ]
+    },
+    {
+        id: 28,
+        name: "Orange Chum Chum",
+        image: "/images/ordar-page/Sweets/Orange chum chum.jpg",
+        description: "Vibrant orange Bengali sweet with a citrus twist.",
+        variants: [
+            { weight: "1/4 lb", price: 3.00 },
+            { weight: "1/2 lb", price: 6.00 },
+            { weight: "1 lb", price: 12.00 },
+        ]
+    },
+    {
+        id: 29,
+        name: "Pan Petha",
+        image: "/images/ordar-page/Sweets/Pan petha.webp",
+        description: "Agra's famous petha with betel leaf flavor.",
+        variants: [
+            { weight: "1 pc", price: 2.50 },
+            { weight: "2 pc", price: 5.00 },
+            { weight: "4 pc", price: 10.00 },
+        ]
+    },
+    {
+        id: 30,
+        name: "Kaju Paan",
+        image: "/images/ordar-page/Sweets/Kaju paan.jpg",
+        description: "Cashew-based sweet shaped like betel leaf.",
+        variants: [
+            { weight: "1 pc", price: 2.00 },
+            { weight: "2 pc", price: 4.00 },
+            { weight: "4 pc", price: 8.00 },
+        ]
+    },
+    {
+        id: 31,
+        name: "Paan Ladoo",
+        image: "/images/ordar-page/Sweets/Paan ladoo.jpg",
+        description: "Unique ladoo with refreshing paan flavor.",
+        variants: [
+            { weight: "1 pc", price: 2.00 },
+            { weight: "2 pc", price: 4.00 },
+            { weight: "4 pc", price: 8.00 },
+        ]
+    },
+    {
+        id: 32,
+        name: "Rose Ladoo",
+        image: "/images/ordar-page/Sweets/Rose ladoo.jpg",
+        description: "Fragrant ladoo infused with rose essence.",
+        variants: [
+            { weight: "1 pc", price: 3.00 },
+            { weight: "2 pc", price: 6.00 },
+            { weight: "4 pc", price: 12.00 },
+        ]
+    },
+    {
+        id: 33,
+        name: "Gulab Jamun",
+        image: "/images/ordar-page/Sweets/Gulab jamun.jpg",
+        description: "Classic deep-fried dumplings in rose sugar syrup.",
+        variants: [
+            { weight: "1/4 lb", price: 2.50 },
+            { weight: "1/2 lb", price: 5.00 },
+            { weight: "1 lb", price: 10.00 },
+        ]
+    },
+    {
+        id: 34,
+        name: "Coconut Gulab Jamun",
+        image: "/images/ordar-page/Sweets/Coconut_Gulab_Jamun.webp",
+        description: "Gulab jamun rolled in shredded coconut.",
+        variants: [
+            { weight: "1/4 lb", price: 2.50 },
+            { weight: "1/2 lb", price: 5.00 },
+            { weight: "1 lb", price: 10.00 },
+        ]
+    },
+    {
+        id: 35,
+        name: "Angoori Gulab Jamun",
+        image: "/images/ordar-page/Sweets/Angoori gulab jamun.webp",
+        description: "Mini grape-sized gulab jamun in syrup.",
+        variants: [
+            { weight: "1/4 lb", price: 2.50 },
+            { weight: "1/2 lb", price: 5.00 },
+            { weight: "1 lb", price: 10.00 },
+        ]
+    },
+    {
+        id: 36,
+        name: "Gluten Free Gulab Jamun",
+        image: "/images/ordar-page/Sweets/Gluten free gulab jamun.jpg",
+        description: "Delicious gulab jamun made without gluten.",
+        variants: [
+            { weight: "1/4 lb", price: 2.50 },
+            { weight: "1/2 lb", price: 5.00 },
+            { weight: "1 lb", price: 10.00 },
+        ]
+    },
+    {
+        id: 37,
+        name: "Rasgulla",
+        image: "/images/ordar-page/Sweets/Rasgulla.jpg",
+        description: "Soft spongy cheese balls in light sugar syrup.",
+        variants: [
+            { weight: "1/4 lb", price: 2.50 },
+            { weight: "1/2 lb", price: 5.00 },
+            { weight: "1 lb", price: 10.00 },
+        ]
+    },
+    {
+        id: 38,
+        name: "Angoori Rasgulla",
+        image: "/images/ordar-page/Sweets/Angoori rasgulla.png",
+        description: "Mini grape-sized rasgulla in syrup.",
+        variants: [
+            { weight: "1/4 lb", price: 2.50 },
+            { weight: "1/2 lb", price: 5.00 },
+            { weight: "1 lb", price: 10.00 },
+        ]
+    },
+    {
+        id: 39,
+        name: "Spongy Rasgulla",
+        image: "/images/ordar-page/Sweets/Spongy rasgulla.jpeg",
+        description: "Extra soft and spongy rasgulla.",
+        variants: [
+            { weight: "1 pc", price: 3.00 },
+            { weight: "2 pc", price: 6.00 },
+            { weight: "4 pc", price: 12.00 },
+        ]
+    },
+    {
+        id: 40,
+        name: "Coconut Rasgulla",
+        image: "/images/ordar-page/Sweets/Coconut rasgulla.jpg",
+        description: "Rasgulla with coconut filling.",
+        variants: [
+            { weight: "1/4 lb", price: 2.50 },
+            { weight: "1/2 lb", price: 5.00 },
+            { weight: "1 lb", price: 10.00 },
+        ]
+    },
+    {
+        id: 41,
+        name: "Rasmalai",
+        image: "/images/ordar-page/Sweets/rasmalai-recipe.jpg",
+        description: "Soft paneer discs in saffron-flavored creamy milk.",
+        variants: [
+            { weight: "1 pc", price: 3.00 },
+            { weight: "2 pc", price: 6.00 },
+            { weight: "4 pc", price: 12.00 },
+        ]
+    },
+    {
+        id: 42,
+        name: "Gajar Halwa",
+        image: "/images/ordar-page/Sweets/Gajar-Halwa-Indian.webp",
+        description: "Traditional carrot pudding with milk, ghee, and nuts.",
+        variants: [
+            { weight: "1/4 lb", price: 3.25 },
+            { weight: "1/2 lb", price: 6.50 },
+            { weight: "1 lb", price: 13.00 },
+        ]
+    },
+    {
+        id: 43,
+        name: "Moongdal Halwa",
+        image: "/images/ordar-page/Sweets/Dal-Halwa-Blog.jpg",
+        description: "Rich halwa made with moong lentils and ghee.",
+        variants: [
+            { weight: "1/4 lb", price: 3.25 },
+            { weight: "1/2 lb", price: 6.50 },
+            { weight: "1 lb", price: 13.00 },
         ]
     },
 ];
@@ -215,19 +655,6 @@ export default function SweetsList() {
                     </div>
                 </div>
 
-                {/* Bottom Showcase Images */}
-                <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-                    {[22, 26, 27, 28].map((num) => (
-                        <div key={num} className="relative aspect-[3/4] w-full max-w-[200px] mx-auto overflow-hidden rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none shadow-lg hover:scale-105 transition-transform duration-300">
-                            <Image
-                                src={`/images/sweets/image ${num}.png`}
-                                alt={`Sweet showcase ${num}`}
-                                fill
-                                className="object-cover"
-                            />
-                        </div>
-                    ))}
-                </div>
             </div>
 
             {/* Cart Notification */}
