@@ -2,32 +2,49 @@
 
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { useCheckout } from "@/context/CheckoutContext";
+import { useCart } from "@/context/CartContext";
 
 export default function CheckoutForm() {
+  const router = useRouter();
   const [isLearnMoreOpen, setIsLearnMoreOpen] = useState(false);
   const {
     contactInfo,
     setContactInfo,
     cardRef,
-    squareReady,
     locationId,
     error,
+    setError,
+    isProcessing,
+    setIsProcessing,
   } = useCheckout();
+  const { getCartTotal, cartItems, clearCart } = useCart();
+
   const cardContainerRef = useRef<HTMLDivElement>(null);
   const [cardInitialized, setCardInitialized] = useState(false);
   const [cardError, setCardError] = useState("");
+  const [gPayAvailable, setGPayAvailable] = useState(false);
+  const gPayRef = useRef<SquareGooglePay | null>(null);
+  const paymentRequestRef = useRef<SquarePaymentRequest | null>(null);
+  const paymentsInstanceRef = useRef<SquarePayments | null>(null);
 
-  // Initialize Square Card element when location is ready
-  // Polls for window.Square instead of relying on onLoad state (handles Strict Mode re-mounts)
+  // Calculate totals for Google Pay
+  const subtotal = getCartTotal();
+  const bagFee = subtotal > 0 ? 0.25 : 0;
+  const tax = Number((subtotal * 0.05).toFixed(2));
+  const gPayTotal = (subtotal + bagFee + tax).toFixed(2);
+
+  // Initialize Square Card + Google Pay when location is ready
   useEffect(() => {
     if (!locationId) return;
 
     let cancelled = false;
     let localCard: SquareCard | null = null;
+    let localGPay: SquareGooglePay | null = null;
 
-    const initCard = async () => {
-      // Poll for Square SDK availability (script loads async)
+    const init = async () => {
+      // Poll for Square SDK
       let attempts = 0;
       while (!window.Square && !cancelled && attempts < 50) {
         await new Promise((r) => setTimeout(r, 200));
@@ -35,43 +52,175 @@ export default function CheckoutForm() {
       }
 
       if (cancelled || !window.Square) {
-        if (!cancelled) setCardError("Square SDK failed to load. Please refresh.");
+        if (!cancelled)
+          setCardError("Square SDK failed to load. Please refresh.");
         return;
       }
 
       try {
         const appId = process.env.NEXT_PUBLIC_SQUARE_APP_ID!;
         const payments = window.Square.payments(appId, locationId);
-        localCard = await payments.card();
+        paymentsInstanceRef.current = payments;
 
+        // Initialize Card
+        localCard = await payments.card();
         if (cancelled) {
           localCard.destroy().catch(() => {});
           return;
         }
-
         await localCard.attach("#square-card-container");
         cardRef.current = localCard;
         setCardInitialized(true);
         setCardError("");
+
+        // Initialize Google Pay
+        try {
+          const paymentRequest = payments.paymentRequest({
+            countryCode: "CA",
+            currencyCode: "CAD",
+            total: { amount: "1.00", label: "Total" },
+          });
+          paymentRequestRef.current = paymentRequest;
+
+          localGPay = await payments.googlePay(paymentRequest);
+          if (cancelled) {
+            localGPay.destroy().catch(() => {});
+            return;
+          }
+          await localGPay.attach("#google-pay-button");
+          gPayRef.current = localGPay;
+          setGPayAvailable(true);
+        } catch (gPayErr) {
+          // Google Pay not available on this device/browser - that's ok
+          console.log("Google Pay not available:", gPayErr);
+          setGPayAvailable(false);
+        }
       } catch (err) {
-        console.error("Failed to initialize Square card:", err);
+        console.error("Failed to initialize payment form:", err);
         if (!cancelled) {
           setCardError("Failed to initialize payment form. Please refresh.");
         }
       }
     };
 
-    initCard();
+    init();
 
     return () => {
       cancelled = true;
-      if (localCard) {
-        localCard.destroy().catch(() => {});
-      }
+      if (localCard) localCard.destroy().catch(() => {});
+      if (localGPay) localGPay.destroy().catch(() => {});
       cardRef.current = null;
+      gPayRef.current = null;
+      paymentsInstanceRef.current = null;
+      paymentRequestRef.current = null;
       setCardInitialized(false);
+      setGPayAvailable(false);
     };
   }, [locationId, cardRef]);
+
+  // Keep Google Pay payment request in sync with cart total
+  useEffect(() => {
+    if (paymentRequestRef.current && gPayAvailable) {
+      paymentRequestRef.current.update({
+        total: { amount: gPayTotal, label: "Total" },
+      });
+    }
+  }, [gPayTotal, gPayAvailable]);
+
+  // Handle Google Pay express checkout
+  const handleGooglePay = async () => {
+    if (!gPayRef.current || isProcessing) return;
+
+    setError("");
+    setIsProcessing(true);
+
+    try {
+      // Update payment request with latest total
+      if (paymentRequestRef.current) {
+        paymentRequestRef.current.update({
+          total: { amount: gPayTotal, label: "Total" },
+        });
+      }
+
+      const tokenResult = await gPayRef.current.tokenize();
+
+      if (tokenResult.status !== "OK") {
+        const errorMessage =
+          tokenResult.errors
+            ?.map((e: { message: string }) => e.message)
+            .join(", ") || "Google Pay authorization failed.";
+        setError(errorMessage);
+        setIsProcessing(false);
+        return;
+      }
+
+      // Process payment via API
+      const total = parseFloat(gPayTotal);
+      const response = await fetch("/api/process-payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sourceId: tokenResult.token,
+          cartItems: cartItems.map((item) => ({
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price,
+          })),
+          amounts: { subtotal, bagFee, tax, tip: 0, total },
+          contactInfo: {
+            firstName: contactInfo.firstName || "Guest",
+            lastName: contactInfo.lastName || "",
+            email: contactInfo.email || "",
+            phone: contactInfo.phone || "",
+          },
+          note: "",
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        const errorMsg =
+          result.details
+            ?.map(
+              (d: { detail?: string; message?: string }) =>
+                d.detail || d.message
+            )
+            .join(", ") ||
+          result.error ||
+          "Payment failed. Please try again.";
+        setError(errorMsg);
+        setIsProcessing(false);
+        return;
+      }
+
+      // Store order details for confirmation page
+      sessionStorage.setItem(
+        "kesri-order-confirmation",
+        JSON.stringify({
+          payment: result.payment,
+          order: result.order,
+          contactInfo: {
+            firstName: contactInfo.firstName || "Guest",
+            lastName: contactInfo.lastName || "",
+            email: contactInfo.email || "",
+            phone: contactInfo.phone || "",
+          },
+          cartItems,
+          amounts: { subtotal, bagFee, tax, tip: 0, total },
+          pickupTime: `Today at ${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true })}`,
+          note: "",
+        })
+      );
+
+      clearCart();
+      router.push("/order-confirmation");
+    } catch (err) {
+      console.error("Google Pay error:", err);
+      setError("An unexpected error occurred. Please try again.");
+      setIsProcessing(false);
+    }
+  };
 
   const updateContact = (field: string, value: string) => {
     setContactInfo((prev) => ({ ...prev, [field]: value }));
@@ -84,7 +233,20 @@ export default function CheckoutForm() {
         <button className="bg-[#FF9900] h-12 rounded-tl-lg rounded-br-lg rounded-tr-none rounded-bl-none flex items-center justify-center font-medium text-black transition-opacity hover:opacity-90">
           Square Pay
         </button>
-        <button className="bg-[#dcd9d785] h-12 rounded-tl-lg rounded-br-lg rounded-tr-none rounded-bl-none flex items-center justify-center transition-opacity hover:opacity-90 border border-gray-200">
+
+        {/* Hidden container for Square SDK Google Pay initialization */}
+        <div id="google-pay-button" className="hidden" />
+
+        {/* Custom styled Google Pay button */}
+        <button
+          onClick={handleGooglePay}
+          disabled={!gPayAvailable || isProcessing}
+          className={`h-12 rounded-tl-lg rounded-br-lg rounded-tr-none rounded-bl-none flex items-center justify-center transition-opacity border border-gray-200 ${
+            gPayAvailable
+              ? "bg-[#dcd9d785] hover:opacity-90 cursor-pointer"
+              : "bg-[#dcd9d785] opacity-50 cursor-not-allowed"
+          }`}
+        >
           <Image
             src="/images/cat-page/googlepay 1.png"
             alt="GPay"
@@ -207,7 +369,6 @@ export default function CheckoutForm() {
             <p className="text-red-600 text-sm">{error}</p>
           </div>
         )}
-
       </div>
 
       {/* Square Pay Opt-in */}
