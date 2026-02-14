@@ -4,7 +4,7 @@
       "id": 1,
       "title": "Main Course - Vegetarian",
       "description": "A wholesome vegetarian main course crafted with fresh ingredients and rich flavors.",
-      "image": "/images/menu/Main Course - Vegetarian.jpg"
+      "image": "/images/menu/daal makhani .png"
     },
     {
       "id": 2,
@@ -16,13 +16,13 @@
       "id": 3,
       "title": "Dessert",
       "description": "A sweet ending that melts in your mouth and completes the meal perfectly.",
-      "image": "/images/menu/Dessert.jpg"
+      "image": "/images/menu/Gulab Jamun.png"
     },
     {
       "id": 4,
       "title": "Appetizers - Veg",
       "description": "Delicious vegetarian appetizers to awaken your taste buds and start the meal right.",
-      "image": "/images/menu/APPETIZER-veg.jpg"
+      "image": "/images/menu/APPETIZER-veg.png"
     },
     {
       "id": 5,
