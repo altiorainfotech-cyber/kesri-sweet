@@ -115,7 +115,7 @@ export default function Footer() {
       </div>
         {/* Copyright Bar */}
         <div className="mt-8 pt-4 border-t border-white/20 text-center text-sm text-gray-600">
-          © 2026 Kesri Sweets • All Rights Reserved | Developed by{" "}
+          © 2026 Kesari Sweets • All Rights Reserved | Developed by{" "}
           <a
             href="https://altiorainfotech.com/"
             target="_blank"
